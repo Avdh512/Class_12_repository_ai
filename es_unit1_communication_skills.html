@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ES Unit 1 — Communication Skills | Class XII</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --tr: 1.2s cubic-bezier(.4,0,.2,1); }
+[data-theme="day"] {
+  --sky-top:#74b9d8; --sky-mid:#b8dcf0; --sky-bot:#fde8c8;
+  --bg:#fdf6ec; --surface:#fffbf5; --surface2:#fef3e2;
+  --border:#e8d5b7; --text:#2c1810; --text-muted:#7a5c42;
+  --accent:#d97b34; --accent2:#2d8a4e; --accent3:#c94f27;
+  --accent4:#8b5cf6; --code-bg:#1a1410; --code-text:#f0e0c8;
+  --nav-bg:rgba(253,246,236,0.94); --sun-bg:#fff176;
+  --sun-shadow:rgba(255,200,50,.7); --star-op:0; --cloud-op:1;
+}
+[data-theme="night"] {
+  --sky-top:#020818; --sky-mid:#0a1628; --sky-bot:#1a2a4a;
+  --bg:#080e1f; --surface:#0e1828; --surface2:#141f35;
+  --border:#1e2d4a; --text:#e8edf8; --text-muted:#7a90b8;
+  --accent:#5b8cff; --accent2:#00d4aa; --accent3:#ff6b9d;
+  --accent4:#a78bfa; --code-bg:#030810; --code-text:#c9d8f0;
+  --nav-bg:rgba(8,14,31,0.95); --sun-bg:#e8eeff;
+  --sun-shadow:rgba(180,200,255,.55); --star-op:1; --cloud-op:0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.78;transition:background var(--tr),color var(--tr);overflow-x:hidden;}
+.sky{position:fixed;inset:0;z-index:-2;pointer-events:none;}
+.sky-grad{position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 55%,var(--sky-bot) 100%);opacity:.16;transition:background var(--tr),opacity var(--tr);}
+[data-theme="night"] .sky-grad{opacity:.38;}
+.celestial{position:absolute;top:55px;right:130px;width:66px;height:66px;border-radius:50%;background:var(--sun-bg);box-shadow:0 0 40px var(--sun-shadow),0 0 90px var(--sun-shadow);transition:all var(--tr);}
+[data-theme="night"] .celestial{width:54px;height:54px;top:75px;right:105px;}
+.crater{position:absolute;border-radius:50%;background:rgba(0,0,0,.08);opacity:0;transition:opacity var(--tr);}
+[data-theme="night"] .crater{opacity:1;}
+.cr1{width:13px;height:13px;top:17px;left:15px;}.cr2{width:8px;height:8px;top:31px;left:33px;}.cr3{width:10px;height:10px;top:11px;left:35px;}
+.stars{position:absolute;inset:0;opacity:var(--star-op);transition:opacity var(--tr);}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+.clouds{position:absolute;inset:0;opacity:var(--cloud-op);transition:opacity var(--tr);pointer-events:none;}
+.cloud{position:absolute;border-radius:60px;background:rgba(255,255,255,.8);}
+.cloud::before,.cloud::after{content:'';position:absolute;background:inherit;border-radius:50%;}
+.cl1{width:110px;height:34px;top:110px;left:7%;animation:drift 30s linear infinite;}
+.cl1::before{width:55px;height:46px;top:-20px;left:14px;}.cl1::after{width:42px;height:36px;top:-14px;left:50px;}
+.cl2{width:85px;height:28px;top:170px;left:54%;animation:drift 42s linear infinite 6s;}
+.cl2::before{width:46px;height:38px;top:-16px;left:11px;}.cl2::after{width:32px;height:26px;top:-10px;left:36px;}
+.cl3{width:65px;height:22px;top:85px;left:34%;animation:drift 55s linear infinite 14s;}
+.cl3::before{width:34px;height:28px;top:-12px;left:9px;}
+@keyframes drift{from{transform:translateX(-250px)}to{transform:translateX(110vw)}}
+.toggle-wrap{position:fixed;top:16px;right:20px;z-index:999;display:flex;align-items:center;gap:9px;}
+.tlabel{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);transition:color var(--tr);user-select:none;}
+.tbtn{width:62px;height:30px;background:var(--surface2);border:2px solid var(--border);border-radius:99px;cursor:pointer;position:relative;transition:background var(--tr),border-color var(--tr);}
+.tbtn::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--sun-bg);box-shadow:0 0 8px var(--sun-shadow);transition:transform .5s cubic-bezier(.4,0,.2,1),background .5s,box-shadow .5s;}
+[data-theme="night"] .tbtn::after{transform:translateX(32px);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.4rem;height:56px;gap:.4rem;transition:background var(--tr),border-color var(--tr);overflow:hidden;}
+.nav-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--accent);white-space:nowrap;margin-right:.6rem;flex-shrink:0;transition:color var(--tr);}
+.nav-links{display:flex;gap:.2rem;flex:1;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding-right:3.5rem;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links a{font-size:.67rem;padding:.25rem .7rem;border-radius:20px;color:var(--text-muted);text-decoration:none;font-weight:600;transition:all .2s;white-space:nowrap;flex-shrink:0;}
+.nav-links a:hover,.nav-links a.active{background:var(--accent);color:#fff;}
+.nav-fade{position:absolute;right:0;top:0;height:56px;width:80px;background:linear-gradient(to left,var(--nav-bg) 55%,transparent);pointer-events:none;z-index:2;transition:background var(--tr);}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 5rem;text-align:center;}
+.hero-inner{max-width:700px;}
+.badge{display:inline-block;background:color-mix(in srgb,var(--accent) 13%,transparent);border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);color:var(--accent);font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:.38rem 1.3rem;border-radius:30px;margin-bottom:1.4rem;transition:all var(--tr);}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-1px;line-height:1.05;margin-bottom:1.1rem;color:var(--text);transition:color var(--tr);}
+.hero h1 span{color:var(--accent);}
+.hero p{font-size:1rem;color:var(--text-muted);max-width:540px;margin:0 auto 2.2rem;transition:color var(--tr);}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;}
+.chip{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:.4rem 1rem;font-size:.76rem;font-weight:600;color:var(--text-muted);text-decoration:none;transition:all .22s;}
+.chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 18%,transparent);}
+.container{max-width:1080px;margin:0 auto;padding:0 2rem;}
+section.topic{padding:5rem 0;border-top:1px solid var(--border);transition:border-color var(--tr);}
+.s-tag{font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.45rem;transition:color var(--tr);}
+.s-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.7rem,3.8vw,2.5rem);line-height:1.08;margin-bottom:1.1rem;color:var(--text);transition:color var(--tr);}
+.s-intro{color:var(--text-muted);font-size:.96rem;max-width:820px;border-left:3px solid var(--accent);padding:.95rem 1.4rem;background:var(--surface);border-radius:0 12px 12px 0;margin-bottom:2.2rem;line-height:1.86;transition:all var(--tr);}
+.s-intro strong{color:var(--text);}
+h3.sh{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--accent2);margin:2rem 0 .8rem;display:flex;align-items:center;gap:.6rem;transition:color var(--tr);}
+h3.sh::before{content:'';width:22px;height:3px;background:var(--accent2);border-radius:2px;flex-shrink:0;transition:background var(--tr);}
+h4.ssh{font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;color:var(--accent4);margin:1.5rem 0 .6rem;transition:color var(--tr);}
+p.bd{color:var(--text-muted);font-size:.94rem;margin-bottom:.85rem;transition:color var(--tr);}
+p.bd strong{color:var(--text);}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.4rem 0 2.2rem;}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.3rem;transition:all .25s;}
+.card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 12px 30px color-mix(in srgb,var(--accent) 16%,transparent);}
+.card .icon{font-size:1.75rem;margin-bottom:.7rem;}
+.card h4{font-family:'Playfair Display',serif;font-weight:700;font-size:.97rem;margin-bottom:.4rem;color:var(--text);transition:color var(--tr);}
+.card p{font-size:.84rem;color:var(--text-muted);line-height:1.62;transition:color var(--tr);}
+.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1.4rem 0;}
+.ic{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.4rem;transition:all var(--tr);}
+.ic h4{font-size:.72rem;color:var(--accent2);margin-bottom:.65rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+.ic ul{list-style:none;}
+.ic ul li{font-size:.86rem;color:var(--text-muted);padding:.2rem 0 .2rem 1.2rem;position:relative;transition:color var(--tr);}
+.ic ul li::before{content:'▸';position:absolute;left:0;color:var(--accent2);font-size:.76rem;}
+.tw{overflow-x:auto;margin:1.4rem 0;border-radius:12px;border:1px solid var(--border);transition:border-color var(--tr);}
+table{width:100%;border-collapse:collapse;font-size:.86rem;}
+th{background:var(--surface2);color:var(--accent);font-weight:700;padding:.8rem 1.1rem;text-align:left;border-bottom:2px solid var(--border);font-family:'Playfair Display',serif;transition:all var(--tr);}
+td{padding:.72rem 1.1rem;border-bottom:1px solid var(--border);color:var(--text-muted);transition:all var(--tr);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--surface2);color:var(--text);}
+.hl{background:color-mix(in srgb,var(--accent2) 9%,transparent);border:1px solid color-mix(in srgb,var(--accent2) 28%,transparent);border-radius:11px;padding:.95rem 1.4rem;margin:1.1rem 0;font-size:.9rem;color:var(--text-muted);line-height:1.82;transition:all var(--tr);}
+.hl strong{color:var(--accent2);}
+.warn{background:color-mix(in srgb,var(--accent3) 9%,transparent);border:1px solid color-mix(in srgb,var(--accent3) 28%,transparent);border-radius:11px;padding:.95rem 1.4rem;margin:1.1rem 0;font-size:.9rem;color:var(--text-muted);transition:all var(--tr);}
+.warn strong{color:var(--accent3);}
+.note{background:color-mix(in srgb,var(--accent4) 9%,transparent);border:1px solid color-mix(in srgb,var(--accent4) 28%,transparent);border-radius:11px;padding:.95rem 1.4rem;margin:1.1rem 0;font-size:.9rem;color:var(--text-muted);transition:all var(--tr);}
+.note strong{color:var(--accent4);}
+.steps{display:flex;flex-direction:column;gap:.7rem;margin:1.2rem 0;}
+.step{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:1rem 1.3rem;transition:all var(--tr);}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;font-family:'Playfair Display',serif;}
+.step-body h5{font-weight:600;font-size:.92rem;margin-bottom:.25rem;color:var(--text);transition:color var(--tr);}
+.step-body p{font-size:.85rem;color:var(--text-muted);transition:color var(--tr);}
+.acronym-box{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:1.6rem;margin:1.4rem 0;}
+.acronym-row{display:flex;gap:1rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--border);}
+.acronym-row:last-child{border-bottom:none;}
+.acronym-letter{width:40px;height:40px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;flex-shrink:0;font-family:'Playfair Display',serif;}
+.acronym-text h5{font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:.2rem;}
+.acronym-text p{font-size:.84rem;color:var(--text-muted);}
+#assessment{padding:5rem 0 4rem;border-top:1px solid var(--border);}
+.aw{background:linear-gradient(135deg,var(--surface),color-mix(in srgb,var(--accent) 7%,var(--surface)));border:1.5px solid color-mix(in srgb,var(--accent) 28%,var(--border));border-radius:22px;padding:2.8rem;transition:all var(--tr);}
+.a-title{font-family:'Playfair Display',serif;font-weight:900;font-size:2.1rem;letter-spacing:-.5px;margin-bottom:.35rem;color:var(--text);transition:color var(--tr);}
+.a-sub{color:var(--text-muted);font-size:.88rem;margin-bottom:2.2rem;}
+.qlabel{font-weight:700;font-size:.67rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);padding-bottom:.55rem;border-bottom:1px solid var(--border);margin:2.2rem 0 1.3rem;transition:all var(--tr);}
+.mcq{margin-bottom:1.8rem;}
+.mcq-q{font-size:.95rem;font-weight:500;margin-bottom:.85rem;color:var(--text);transition:color var(--tr);}
+.mcq-q em{color:var(--accent);font-style:normal;font-weight:700;font-family:'Playfair Display',serif;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.opt{background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;padding:.6rem .95rem;cursor:pointer;transition:all .2s;font-size:.86rem;color:var(--text-muted);display:flex;align-items:center;gap:.65rem;user-select:none;}
+.opt:hover{border-color:var(--accent);color:var(--text);background:color-mix(in srgb,var(--accent) 7%,var(--surface2));}
+.opt.correct{background:color-mix(in srgb,var(--accent2) 12%,transparent);border-color:var(--accent2);color:var(--accent2);}
+.opt.wrong{background:color-mix(in srgb,var(--accent3) 9%,transparent);border-color:var(--accent3);color:var(--accent3);}
+.opt .ltr{width:21px;height:21px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0;transition:background var(--tr);}
+.qa{margin-bottom:1.4rem;}
+.qa-q{font-size:.94rem;margin-bottom:.45rem;color:var(--text);transition:color var(--tr);}
+.qa-q em{color:var(--accent);font-style:normal;font-weight:700;font-family:'Playfair Display',serif;}
+.ans{background:var(--code-bg);border-left:3px solid var(--accent2);border-radius:0 9px 9px 0;padding:.95rem 1.2rem;font-size:.87rem;color:var(--code-text);line-height:1.82;display:none;margin-top:.45rem;transition:all var(--tr);}
+.ans.show{display:block;}
+.rbtn{background:transparent;border:1.5px solid var(--border);border-radius:7px;padding:.3rem .9rem;font-size:.74rem;color:var(--text-muted);cursor:pointer;font-weight:600;transition:all .2s;margin-top:.38rem;}
+.rbtn:hover{border-color:var(--accent2);color:var(--accent2);}
+.spanel{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.3rem 1.7rem;display:flex;align-items:center;justify-content:space-between;margin-top:1.8rem;flex-wrap:wrap;gap:1rem;transition:all var(--tr);}
+.snum{font-family:'Playfair Display',serif;font-weight:900;font-size:2.4rem;color:var(--accent);transition:color var(--tr);}
+.stxt{font-size:.84rem;color:var(--text-muted);}
+.sbtn{background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 68%,var(--accent2)));border:none;border-radius:11px;padding:.85rem 2.4rem;font-weight:700;font-size:.88rem;color:#fff;cursor:pointer;transition:all .22s;letter-spacing:.4px;font-family:'Outfit',sans-serif;margin-top:1.4rem;}
+.sbtn:hover{transform:translateY(-3px);box-shadow:0 12px 28px color-mix(in srgb,var(--accent) 38%,transparent);}
+footer{text-align:center;padding:3rem 2rem;color:var(--text-muted);font-size:.82rem;border-top:1px solid var(--border);transition:all var(--tr);}
+footer span{color:var(--accent);}
+.divider{height:1px;background:var(--border);margin:2rem 0;transition:background var(--tr);}
+@media(max-width:640px){.opts{grid-template-columns:1fr;}.nav-links{display:none;}.aw{padding:1.4rem;}.tlabel{display:none;}}
+</style>
+</head>
+<body>
+<div class="sky">
+  <div class="sky-grad"></div>
+  <div class="celestial"><div class="crater cr1"></div><div class="crater cr2"></div><div class="crater cr3"></div></div>
+  <div class="stars" id="stars"></div>
+  <div class="clouds"><div class="cloud cl1"></div><div class="cloud cl2"></div><div class="cloud cl3"></div></div>
+</div>
+<div class="toggle-wrap">
+  <span class="tlabel" id="tlbl">Day</span>
+  <div class="tbtn" id="tbtn" onclick="toggleTheme()" title="Day / Night"></div>
+  <span id="tico">☀️</span>
+</div>
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;gap:.4rem;text-decoration:none;color:var(--text-muted);font-size:.72rem;font-weight:700;letter-spacing:.5px;flex-shrink:0;transition:color .2s;border:1.5px solid var(--border);border-radius:20px;padding:.25rem .8rem;margin-right:.5rem;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'">← Home</a>
+  <div class="nav-logo">ES · Unit 1</div>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#listening">Active Listening</a>
+    <a href="#speech">Parts of Speech</a>
+    <a href="#sentences">Writing Sentences</a>
+    <a href="#assessment">Assessment</a>
+  </div>
+  <div class="nav-fade"></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge">Employability Skills · Unit 01 · Class XII · CBSE</div>
+    <h1><span>Communication</span><br>Skills</h1>
+    <p>Master active listening, parts of speech, and sentence construction — the building blocks of effective workplace communication.</p>
+    <div class="chips">
+      <a href="#overview" class="chip">📋 Overview</a>
+      <a href="#listening" class="chip">👂 Active Listening</a>
+      <a href="#speech" class="chip">📝 Parts of Speech</a>
+      <a href="#sentences" class="chip">✍️ Writing Sentences</a>
+      <a href="#assessment" class="chip">✅ Assessment</a>
+    </div>
+  </div>
+</section>
+
+<section class="topic" id="overview">
+<div class="container">
+  <div class="s-tag">Unit 1 — Overview</div>
+  <div class="s-title">Communication Skills</div>
+  <div class="s-intro">
+    Communication is a <strong>two-way process</strong> through which information or messages are exchanged between individuals using language, symbols, signs or behaviour. Speaking, listening, reading and writing are the four key skills of communication that help us understand others and express ourselves.
+  </div>
+  <div class="ig">
+    <div class="ic">
+      <h4>Four Key Skills</h4>
+      <ul>
+        <li>Listening</li><li>Speaking</li><li>Reading</li><li>Writing</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Elements of Communication</h4>
+      <ul>
+        <li>Sender (encodes message)</li><li>Channel (medium)</li><li>Receiver (decodes message)</li><li>Feedback (confirms understanding)</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Ideal Message Qualities</h4>
+      <ul>
+        <li><strong>Clear</strong> — conveys exact meaning</li><li><strong>Concise</strong> — appropriately brief</li><li><strong>Accurate</strong> — factually correct & verifiable</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="icon">🗣️</div><h4>Session 1</h4><p>Active Listening — RESPECT model, stages and barriers to listening.</p></div>
+    <div class="card"><div class="icon">📖</div><h4>Session 2</h4><p>Parts of Speech — nouns, pronouns, verbs, adjectives, adverbs and supporting parts.</p></div>
+    <div class="card"><div class="icon">✍️</div><h4>Session 3</h4><p>Writing Sentences — active/passive voice, sentence types, paragraphs.</p></div>
+  </div>
+</div>
+</section>
+
+<section class="topic" id="listening">
+<div class="container">
+  <div class="s-tag">Session 1</div>
+  <div class="s-title">Active Listening</div>
+  <div class="s-intro">
+    Active listening is an art that comprises <strong>a desire to comprehend</strong> as well as offer support and empathy to the speaker. It can affect your job effectiveness, the quality of your relationships, and your overall well-being.
+  </div>
+
+  <h3 class="sh">Why Listening Matters</h3>
+  <div class="cards">
+    <div class="card"><div class="icon">📡</div><h4>Obtain Information</h4><p>Listening attentively helps gather accurate, complete information from others.</p></div>
+    <div class="card"><div class="icon">🤝</div><h4>Build Relationships</h4><p>Active listening builds and maintains strong personal and professional relationships.</p></div>
+    <div class="card"><div class="icon">⚡</div><h4>Resolve Conflicts</h4><p>Listening carefully helps understand all perspectives and work towards resolution.</p></div>
+    <div class="card"><div class="icon">🎓</div><h4>Learn & Grow</h4><p>Attentive listening is the foundation of all learning and understanding.</p></div>
+  </div>
+
+  <h3 class="sh">5 Stages of Active Listening</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h5>Receiving</h5><p>Listening attentively to the speaker — giving full, undivided attention.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h5>Understanding</h5><p>An informed agreement about what is being communicated — comprehending the message.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h5>Remembering</h5><p>Retrieving or recalling information from what has been said.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h5>Evaluating</h5><p>Judging the value, quantity, importance and amount of what was said.</p></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h5>Responding</h5><p>Saying or doing something as a meaningful response to what was communicated.</p></div></div>
+  </div>
+
+  <h3 class="sh">The RESPECT Model</h3>
+  <p class="bd">Use the acronym <strong>RESPECT</strong> to ensure active listening in any situation:</p>
+  <div class="acronym-box">
+    <div class="acronym-row"><div class="acronym-letter">R</div><div class="acronym-text"><h5>Remove Distractions</h5><p>Reduce the volume of TV, radio or mobile phone while talking to a person.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">E</div><div class="acronym-text"><h5>Eye Contact</h5><p>Look at the speaker while listening — it signals genuine attention.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">S</div><div class="acronym-text"><h5>Show You're Listening</h5><p>Use gestures, nods, and open body language to show attentiveness.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">P</div><div class="acronym-text"><h5>Pay Attention</h5><p>Focus entirely on what the speaker is saying — not on your reply.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">E</div><div class="acronym-text"><h5>Empathise</h5><p>Share the feelings of the speaker — imagine yourself in their situation.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">C</div><div class="acronym-text"><h5>Clarify Doubts</h5><p>Ask polite, relevant questions to clarify any doubts or misunderstandings.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">T</div><div class="acronym-text"><h5>Tune to Timing</h5><p>Wait for the speaker to finish before responding — never interrupt.</p></div></div>
+  </div>
+
+  <h3 class="sh">Barriers to Active Listening</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Barrier</th><th>How It Affects Listening</th><th>How to Overcome</th></tr>
+      <tr><td>Being Pre-occupied</td><td>Your mind wanders; you miss key points</td><td>Keep away phones; control emotions</td></tr>
+      <tr><td>Noise & Distractions</td><td>Cannot hear the speaker clearly</td><td>Create a quiet, conducive environment</td></tr>
+      <tr><td>Past Experiences / Bias</td><td>Prejudices filter and distort what you hear</td><td>Stay objective; avoid bias</td></tr>
+      <tr><td>Personal Feelings</td><td>Preconceptions about the speaker affect listening</td><td>Allow the speaker to finish; then respond</td></tr>
+    </table>
+  </div>
+</div>
+</section>
+
+<section class="topic" id="speech">
+<div class="container">
+  <div class="s-tag">Session 2</div>
+  <div class="s-title">Parts of Speech</div>
+  <div class="s-intro">
+    In any language, <strong>parts of speech</strong> are categories of words based on their function within a sentence. They are the 'building blocks' of a language. A sentence always begins with a capital letter and ends with a full stop, question mark, or exclamation mark.
+  </div>
+
+  <h3 class="sh">Basic Parts of Speech</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Part of Speech</th><th>What It Does</th><th>Examples</th></tr>
+      <tr><td><strong>Noun</strong></td><td>Names a person, place, thing or idea</td><td>Dog, India, Sanjay</td></tr>
+      <tr><td><strong>Pronoun</strong></td><td>Used in place of a noun</td><td>I, They, He, You</td></tr>
+      <tr><td><strong>Adjective</strong></td><td>Describes a noun</td><td>Small, Blue, Sharp, Loud</td></tr>
+      <tr><td><strong>Verb</strong></td><td>Shows an action</td><td>Run, Eat, Think, Sit</td></tr>
+      <tr><td><strong>Adverb</strong></td><td>Adds meaning to a verb, adjective or adverb</td><td>Easily, Always, Inside, Before</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sh">Supporting Parts of Speech</h3>
+  <div class="cards">
+    <div class="card"><div class="icon">📰</div><h4>Articles</h4><p>'a', 'an', 'the' — used before nouns. 'An' before vowel sounds, 'a' before consonant sounds, 'the' for specific nouns.</p></div>
+    <div class="card"><div class="icon">🔗</div><h4>Conjunctions</h4><p>Join two nouns, phrases or sentences. Common: 'and', 'or', 'but'.</p></div>
+    <div class="card"><div class="icon">📍</div><h4>Prepositions</h4><p>Connect words and show relationships. Answer 'where', 'when', 'how'. Common: 'on', 'at', 'under', 'in'.</p></div>
+    <div class="card"><div class="icon">❗</div><h4>Interjections</h4><p>Express strong emotions — happiness, surprise, anger or pain. Example: Wow! Oh! Thanks!</p></div>
+  </div>
+
+  <h3 class="sh">Capitalisation Rules — MINTS</h3>
+  <div class="hl"><strong>M</strong> — Months (June, December) · <strong>I</strong> — The letter 'I' · <strong>N</strong> — Names of people, places, rivers, mountains, days · <strong>T</strong> — Titles before names (Dr Shah, Mr Patel) · <strong>S</strong> — Starting letter of every sentence</div>
+
+  <h3 class="sh">Key Punctuation Marks</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Mark</th><th>Symbol</th><th>Use</th></tr>
+      <tr><td>Full Stop</td><td>.</td><td>Ends a sentence; abbreviations</td></tr>
+      <tr><td>Comma</td><td>,</td><td>Indicates pause; separates list items</td></tr>
+      <tr><td>Question Mark</td><td>?</td><td>Ends a question</td></tr>
+      <tr><td>Exclamation Mark</td><td>!</td><td>Strong feeling — surprise, anger, joy</td></tr>
+      <tr><td>Apostrophe</td><td>'</td><td>Ownership (Divya's desk); contractions (let's)</td></tr>
+    </table>
+  </div>
+</div>
+</section>
+
+<section class="topic" id="sentences">
+<div class="container">
+  <div class="s-tag">Session 3</div>
+  <div class="s-title">Writing Sentences</div>
+  <div class="s-intro">
+    A sentence is a group of words which together expresses a <strong>complete idea</strong>. Every sentence has a subject (who does the action), a verb (the action), and often an object (what receives the action).
+  </div>
+
+  <h3 class="sh">Parts of a Sentence</h3>
+  <div class="ig">
+    <div class="ic"><h4>Subject</h4><ul><li>Person/thing that performs the action</li><li>Ask "Who did the action?"</li><li>Example: <em>Nisha</em> sells a laptop</li></ul></div>
+    <div class="ic"><h4>Verb</h4><ul><li>Describes the action</li><li>Ask "What is the action?"</li><li>Example: Nisha <em>sells</em> a laptop</li></ul></div>
+    <div class="ic"><h4>Object</h4><ul><li>Receives the action</li><li>Ask "What received the action?"</li><li>Example: Nisha sells <em>a laptop</em></li></ul></div>
+  </div>
+
+  <h3 class="sh">Active vs Passive Voice</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Active Voice</th><th>Passive Voice</th></tr>
+      <tr><td>She wrote an email.</td><td>An email was written by her.</td></tr>
+      <tr><td>He opened the door.</td><td>The door was opened by him.</td></tr>
+      <tr><td>Mohan sold a bike.</td><td>The bike was sold by Mohan.</td></tr>
+    </table>
+  </div>
+  <div class="note"><strong>Key Rule:</strong> In active voice, the subject <em>does</em> the action. In passive voice, the subject <em>receives</em> the action.</div>
+
+  <h3 class="sh">Four Types of Sentences</h3>
+  <div class="cards">
+    <div class="card"><div class="icon">📢</div><h4>Declarative</h4><p>Provides information or states a fact. Ends with a full stop. <em>"I go to office."</em></p></div>
+    <div class="card"><div class="icon">❓</div><h4>Interrogative</h4><p>Asks a question. Ends with a question mark. <em>"Did you go to office?"</em></p></div>
+    <div class="card"><div class="icon">😮</div><h4>Exclamatory</h4><p>Expresses strong emotion. Ends with an exclamation mark. <em>"Oh, it's very cold!"</em></p></div>
+    <div class="card"><div class="icon">👉</div><h4>Imperative</h4><p>Shows an order, command or request. <em>"Wear your sweater."</em></p></div>
+  </div>
+
+  <h3 class="sh">Writing Paragraphs</h3>
+  <p class="bd">A group of sentences forms a paragraph. All sentences in a paragraph must share a <strong>common idea</strong>. When you want to write about a different idea, start a new paragraph. Good paragraphs have a clear topic sentence, supporting details, and a concluding thought.</p>
+  <div class="hl"><strong>Tip:</strong> Practice writing paragraphs on topics you know — your school, a favourite hobby, or a career you aspire to. Focus on using all four sentence types correctly.</div>
+</div>
+</section>
+
+<section id="assessment">
+<div class="container">
+  <div class="aw">
+    <div class="a-title">Assessment</div>
+    <div class="a-sub">Test your understanding of Communication Skills — Unit 01</div>
+
+    <div class="qlabel">Multiple Choice Questions</div>
+
+    <div class="mcq" id="m1">
+      <div class="mcq-q"><em>Q1.</em> Which of the following best describes active listening?</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m1',this,false)"><span class="ltr">A</span>Hearing words without thinking</div>
+        <div class="opt" onclick="pick('m1',this,true)"><span class="ltr">B</span>Comprehending, supporting, and empathising with the speaker</div>
+        <div class="opt" onclick="pick('m1',this,false)"><span class="ltr">C</span>Waiting for your turn to speak</div>
+        <div class="opt" onclick="pick('m1',this,false)"><span class="ltr">D</span>Nodding occasionally while thinking about something else</div>
+      </div>
+    </div>
+
+    <div class="mcq" id="m2">
+      <div class="mcq-q"><em>Q2.</em> In the RESPECT model, what does 'E' stand for (second E)?</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">A</span>Eye contact</div>
+        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">B</span>Evaluate before responding</div>
+        <div class="opt" onclick="pick('m2',this,true)"><span class="ltr">C</span>Empathise with the speaker</div>
+        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">D</span>Express your opinion clearly</div>
+      </div>
+    </div>
+
+    <div class="mcq" id="m3">
+      <div class="mcq-q"><em>Q3.</em> Which part of speech is underlined: "Reema <u>quickly</u> wrote a letter"?</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m3',this,false)"><span class="ltr">A</span>Adjective</div>
+        <div class="opt" onclick="pick('m3',this,false)"><span class="ltr">B</span>Verb</div>
+        <div class="opt" onclick="pick('m3',this,true)"><span class="ltr">C</span>Adverb</div>
+        <div class="opt" onclick="pick('m3',this,false)"><span class="ltr">D</span>Noun</div>
+      </div>
+    </div>
+
+    <div class="mcq" id="m4">
+      <div class="mcq-q"><em>Q4.</em> "The bike was sold by Mohan." — This sentence is in:</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m4',this,false)"><span class="ltr">A</span>Active voice</div>
+        <div class="opt" onclick="pick('m4',this,true)"><span class="ltr">B</span>Passive voice</div>
+        <div class="opt" onclick="pick('m4',this,false)"><span class="ltr">C</span>Interrogative form</div>
+        <div class="opt" onclick="pick('m4',this,false)"><span class="ltr">D</span>Imperative form</div>
+      </div>
+    </div>
+
+    <div class="mcq" id="m5">
+      <div class="mcq-q"><em>Q5.</em> Which of the following is NOT a stage of active listening?</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m5',this,false)"><span class="ltr">A</span>Receiving</div>
+        <div class="opt" onclick="pick('m5',this,false)"><span class="ltr">B</span>Remembering</div>
+        <div class="opt" onclick="pick('m5',this,true)"><span class="ltr">C</span>Non-responding</div>
+        <div class="opt" onclick="pick('m5',this,false)"><span class="ltr">D</span>Evaluating</div>
+      </div>
+    </div>
+
+    <div class="qlabel">Short Answer Questions</div>
+    <div class="qa">
+      <div class="qa-q"><em>Q6.</em> What are the three qualities of an ideal message? Give an example of each.</div>
+      <button class="rbtn" onclick="toggleAns('a6')">Show Answer</button>
+      <div class="ans" id="a6">An ideal message should be: (1) <strong>Clear</strong> — conveys the exact meaning, e.g., "Please allow me to reach office at 11 AM on Tuesday." (2) <strong>Concise</strong> — appropriately brief and to the point, avoiding unnecessary information. (3) <strong>Accurate</strong> — factually correct and verifiable, e.g., "50 per cent of the books have been completed" rather than "most books."</div>
+    </div>
+    <div class="qa">
+      <div class="qa-q"><em>Q7.</em> Write one sentence each for declarative, interrogative, exclamatory and imperative types.</div>
+      <button class="rbtn" onclick="toggleAns('a7')">Show Answer</button>
+      <div class="ans" id="a7"><strong>Declarative:</strong> I completed my project on time. <br><strong>Interrogative:</strong> Did you complete your project? <br><strong>Exclamatory:</strong> I completed my project! <br><strong>Imperative:</strong> Complete your project today.</div>
+    </div>
+
+    <div class="spanel">
+      <div><div class="snum" id="scoreNum">0/5</div><div class="stxt">MCQ Score</div></div>
+      <button class="sbtn" onclick="resetAll()">↺ Reset Quiz</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer><p>Employability Skills · Unit 01 · Communication Skills · <span>Class XII · CBSE</span></p></footer>
+
+<script>
+const sw=document.getElementById('stars');
+for(let i=0;i<180;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.4;s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*6}s;`;sw.appendChild(s);}
+let isDay=true;
+function toggleTheme(){isDay=!isDay;document.documentElement.setAttribute('data-theme',isDay?'day':'night');document.getElementById('tlbl').textContent=isDay?'Day':'Night';document.getElementById('tico').textContent=isDay?'☀️':'🌙';}
+let score=0,answered=0;
+function pick(id,el,correct){
+  const block=document.getElementById(id);
+  if(block.dataset.done)return;
+  block.dataset.done=1;
+  block.querySelectorAll('.opt').forEach(o=>{o.style.pointerEvents='none';});
+  el.classList.add(correct?'correct':'wrong');
+  if(correct){score++;} answered++;
+  document.getElementById('scoreNum').textContent=score+'/'+Math.min(answered,5);
+}
+function toggleAns(id){const el=document.getElementById(id);el.classList.toggle('show');}
+function resetAll(){
+  score=0;answered=0;
+  document.getElementById('scoreNum').textContent='0/5';
+  document.querySelectorAll('.mcq').forEach(b=>{
+    delete b.dataset.done;
+    b.querySelectorAll('.opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.pointerEvents='';});
+  });
+  document.querySelectorAll('.ans').forEach(a=>a.classList.remove('show'));
+}
+</script>
+</body>
+</html>
