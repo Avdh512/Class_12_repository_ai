@@ -197,7 +197,53 @@ nav{
 .section-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:.5rem;color:var(--text);transition:color var(--tr);}
 .section-sub{color:var(--text-muted);font-size:.9rem;line-height:1.65;}
 
-/* ═══════ ORBITAL TIMELINE ═══════ */
+/* ═══════ DUAL ORBITAL LAYOUT ═══════ */
+.dual-orbital-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 1rem 4rem;
+  position:relative;
+}
+.dual-orbital-wrap::after{
+  content:'';
+  position:absolute;
+  left:50%;top:5%;bottom:5%;
+  width:1px;
+  background:linear-gradient(180deg,transparent,var(--border) 20%,var(--border) 80%,transparent);
+  transform:translateX(-50%);
+}
+.orbital-half{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:0 1rem;
+}
+.orbital-half-label{
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+  margin-bottom:1.2rem;text-align:center;
+}
+.orbital-half-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:color-mix(in srgb,var(--ob-color,var(--accent)) 13%,transparent);
+  border:1.5px solid color-mix(in srgb,var(--ob-color,var(--accent)) 35%,transparent);
+  color:var(--ob-color,var(--accent));
+  font-size:.76rem;font-weight:700;letter-spacing:.6px;
+  padding:.38rem 1.1rem;border-radius:30px;
+  transition:all var(--tr);
+}
+.orbital-half-sub{
+  font-size:.65rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-faint);
+}
+@media(max-width:760px){
+  .dual-orbital-wrap{grid-template-columns:1fr;gap:3rem;}
+  .dual-orbital-wrap::after{display:none;}
+}
+
+/* ═══════ ORBITAL SECTION ═══════ */
 .orbital-section{
   position:relative;
   padding:0 0 5rem;
@@ -206,8 +252,7 @@ nav{
 }
 .orbital-wrap{
   width:100%;
-  /* FIXED: increased height from 660px to 820px to give cards room below nodes */
-  height:820px;
+  height:620px;
   position:relative;
   display:flex;align-items:center;justify-content:center;
 }
@@ -553,6 +598,7 @@ footer strong{color:var(--accent);}
   <span class="nav-sub">Subject Code 843</span>
   <div class="nav-right">
     <a href="#units" class="nav-link">Units</a>
+    <a href="#employability" class="nav-link">Employability</a>
     <a href="#quizzes" class="nav-link">Quizzes</a>
     <a href="assessment.html" class="nav-link nav-assess">📝 Assessments</a>
     <div class="toggle-wrap">
@@ -569,8 +615,8 @@ footer strong{color:var(--accent);}
     <div class="badge">CBSE · Class XII · Artificial Intelligence · Code 843</div>
     <h1>Artificial<br><em>Intelligence</em><br>Repository</h1>
     <p class="by-line">Curated by <strong>Avdhesh</strong></p>
-    <p class="hero-desc">Your complete interactive guide to Class XII AI — study notes, in-depth chapter guides, and chapter-wise quizzes all in one place.</p>
-    <div class="subject-code">📚 Subject Code: 843 · All 8 Units Available</div>
+    <p class="hero-desc">Your complete interactive guide to Class XII AI & Employability Skills — study notes, in-depth chapter guides, and chapter-wise quizzes all in one place.</p>
+    <div class="subject-code">📚 Subject Code: 843 · All 8 AI Units · Employability Skills</div>
   </div>
   <div class="scroll-hint">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
@@ -581,34 +627,64 @@ footer strong{color:var(--accent);}
 <!-- ═══ ORBITAL TIMELINE ═══ -->
 <section class="orbital-section" id="units">
   <div class="section-header">
-    <div class="section-eyebrow">All 8 Units</div>
-    <div class="section-title">Course Roadmap</div>
-    <div class="section-sub">Click any node to explore a unit. Watch how topics orbit and connect with each other.</div>
+    <div class="section-eyebrow">Interactive Course Map</div>
+    <div class="section-title">Two Orbital Systems</div>
+    <div class="section-sub">Click any node to explore. Left orbit — Artificial Intelligence (8 units). Right orbit — Employability Skills (5 units).</div>
   </div>
-  <div class="orbital-wrap" id="orbitalWrap">
-    <!-- Orbit track -->
-    <div class="orbit-track"></div>
-    <!-- Center orb -->
-    <div class="orb-center" id="orbCenter">
-      <div class="orb-center-ring"></div>
-      <div class="orb-center-ring"></div>
-      <div class="orb-center-ring"></div>
-      <div class="orb-center-content">
-        <div class="orb-name">Class XII · AI</div>
-        <div class="orb-subtitle">MRIS-14</div>
+
+  <!-- Two orbitals side by side -->
+  <div class="dual-orbital-wrap">
+
+    <!-- LEFT: AI -->
+    <div class="orbital-half">
+      <div class="orbital-half-label">
+        <span class="orbital-half-badge" style="--ob-color:#d97b34;">🤖 Artificial Intelligence</span>
+        <span class="orbital-half-sub">Subject Code 843 · 8 Units</span>
+      </div>
+      <div class="orbital-wrap" id="orbitalWrap">
+        <div class="orbit-track"></div>
+        <div class="orb-center" id="orbCenter">
+          <div class="orb-center-ring"></div>
+          <div class="orb-center-ring"></div>
+          <div class="orb-center-ring"></div>
+          <div class="orb-center-content">
+            <div class="orb-name">Class XII · AI</div>
+            <div class="orb-subtitle">MRIS-14</div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Nodes injected by JS -->
+
+    <!-- RIGHT: ES -->
+    <div class="orbital-half">
+      <div class="orbital-half-label">
+        <span class="orbital-half-badge" style="--ob-color:#e879a0;">💼 Employability Skills</span>
+        <span class="orbital-half-sub">Code 843 · 5 Units</span>
+      </div>
+      <div class="orbital-wrap" id="orbitalWrapES">
+        <div class="orbit-track" style="width:360px;height:360px;"></div>
+        <div class="orb-center" id="orbCenterES" style="background:radial-gradient(circle,#e879a0 0%,#c0417e 40%,#9b2060 100%);box-shadow:0 0 40px rgba(232,121,160,.35),0 0 90px rgba(232,121,160,.25);">
+          <div class="orb-center-ring" style="border-color:rgba(232,121,160,.4);"></div>
+          <div class="orb-center-ring" style="border-color:rgba(232,121,160,.3);"></div>
+          <div class="orb-center-ring" style="border-color:rgba(232,121,160,.2);"></div>
+          <div class="orb-center-content">
+            <div class="orb-name">Employ.<br>Skills</div>
+            <div class="orb-subtitle">NCERT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ CHAPTER GRID ═══ -->
+<!-- ═══ AI CHAPTER GRID ═══ -->
 <section class="grid-section">
   <div class="section-header">
-    <div class="section-eyebrow">Study Guides</div>
-    <div class="section-title">All 8 Units</div>
+    <div class="section-eyebrow">🤖 Artificial Intelligence — Study Guides</div>
+    <div class="section-title">All 8 AI Units</div>
     <div class="section-sub">Click a card to open the full interactive study guide for that unit.</div>
   </div>
   <div class="grid">
@@ -681,6 +757,55 @@ footer strong{color:var(--accent);}
 
 <div class="divider"></div>
 
+<!-- ═══ EMPLOYABILITY SKILLS GRID ═══ -->
+<section class="grid-section" id="employability">
+  <div class="section-header">
+    <div class="section-eyebrow">💼 Employability Skills — Study Guides</div>
+    <div class="section-title">All 5 ES Units</div>
+    <div class="section-sub">Soft skills for the workplace — communication, self-management, ICT, entrepreneurship and green skills from the NCERT textbook.</div>
+  </div>
+  <div class="grid">
+    <a href="es_unit1_communication_skills.html" class="chapter-card" style="--card-accent:#e879a0;">
+      <div class="avail-badge">✓ Available</div>
+      <div class="card-unit">ES · Unit 01</div>
+      <div class="card-title">Communication Skills</div>
+      <div class="card-desc">Active listening with the RESPECT model, 5 stages of listening, parts of speech, writing sentences — active/passive voice and four types of sentences.</div>
+      <div class="card-topics"><span class="topic-tag">Active Listening</span><span class="topic-tag">RESPECT Model</span><span class="topic-tag">Parts of Speech</span><span class="topic-tag">Sentences</span></div>
+      <div class="open-btn">Open ES Unit 1 <span>→</span></div>
+    </a>
+    <a href="#" class="chapter-card" style="--card-accent:#06b6d4;cursor:default;" onclick="return false;">
+      <div class="card-unit">ES · Unit 02</div>
+      <div class="card-title">Self-management Skills</div>
+      <div class="card-desc">Motivation & positive attitude, result orientation, SMART goals, self-awareness and the Big Five personality factor model.</div>
+      <div class="card-topics"><span class="topic-tag">Motivation</span><span class="topic-tag">SMART Goals</span><span class="topic-tag">Self-Awareness</span><span class="topic-tag">Personality</span></div>
+      <div class="open-btn" style="opacity:.45;font-size:.75rem;color:var(--text-faint)">Coming Soon</div>
+    </a>
+    <a href="#" class="chapter-card" style="--card-accent:#f59e0b;cursor:default;" onclick="return false;">
+      <div class="card-unit">ES · Unit 03</div>
+      <div class="card-title">ICT Skills</div>
+      <div class="card-desc">LibreOffice Calc — spreadsheets, formulas, formatting; LibreOffice Impress — slides, text, shapes, images and advanced presentation features.</div>
+      <div class="card-topics"><span class="topic-tag">Spreadsheets</span><span class="topic-tag">Formulas</span><span class="topic-tag">Presentations</span><span class="topic-tag">LibreOffice</span></div>
+      <div class="open-btn" style="opacity:.45;font-size:.75rem;color:var(--text-faint)">Coming Soon</div>
+    </a>
+    <a href="#" class="chapter-card" style="--card-accent:#8b5cf6;cursor:default;" onclick="return false;">
+      <div class="card-unit">ES · Unit 04</div>
+      <div class="card-title">Entrepreneurship Skills</div>
+      <div class="card-desc">What is entrepreneurship, types of entrepreneurs, roles & functions, identifying opportunities, startups, initiative and interpersonal competencies.</div>
+      <div class="card-topics"><span class="topic-tag">Entrepreneur Types</span><span class="topic-tag">Startups</span><span class="topic-tag">Opportunity</span><span class="topic-tag">Competencies</span></div>
+      <div class="open-btn" style="opacity:.45;font-size:.75rem;color:var(--text-faint)">Coming Soon</div>
+    </a>
+    <a href="#" class="chapter-card" style="--card-accent:#10b981;cursor:default;" onclick="return false;">
+      <div class="card-unit">ES · Unit 05</div>
+      <div class="card-title">Green Skills</div>
+      <div class="card-desc">Green jobs across agriculture, transport, solar & wind energy, eco-tourism, construction and solid waste management. Importance of a green economy.</div>
+      <div class="card-topics"><span class="topic-tag">Green Jobs</span><span class="topic-tag">Sustainability</span><span class="topic-tag">Renewable Energy</span><span class="topic-tag">Eco-tourism</span></div>
+      <div class="open-btn" style="opacity:.45;font-size:.75rem;color:var(--text-faint)">Coming Soon</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ═══ QUIZ SECTION ═══ -->
 <section class="quiz-section" id="quizzes">
   <div class="quiz-wrap">
@@ -711,7 +836,7 @@ footer strong{color:var(--accent);}
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <p><strong>Class XII · Artificial Intelligence · Subject Code 843 · CBSE</strong></p>
-  <p class="footer-mono">AI Repository by <strong>Avdhesh</strong> — All 8 Units Available</p>
+  <p class="footer-mono">AI + Employability Skills Repository by <strong>Avdhesh</strong> — 8 AI Units · 5 ES Units</p>
 </footer>
 
 <script>
@@ -884,6 +1009,135 @@ function closeAll(resume=true){
 }
 
 buildOrbital();
+
+/* ════════════════════════════════════
+   ES ORBITAL ENGINE
+════════════════════════════════════ */
+const ES_UNITS = [
+  { id:'es1', label:'ES 01', title:'Communication Skills', date:'Listening & Language', emoji:'🗣️', color:'#e879a0', status:'completed', energy:100, desc:'Active listening (RESPECT model), parts of speech, writing sentences — active/passive voice and four sentence types.', related:['es2'], link:'es_unit1_communication_skills.html' },
+  { id:'es2', label:'ES 02', title:'Self-management', date:'Goals & Mindset', emoji:'🎯', color:'#06b6d4', status:'pending', energy:0, desc:'Motivation, positive attitude, SMART goal-setting, result orientation, self-awareness and the Big Five personality model.', related:['es1','es3'], link:'#' },
+  { id:'es3', label:'ES 03', title:'ICT Skills', date:'Spreadsheets & Slides', emoji:'💻', color:'#f59e0b', status:'pending', energy:0, desc:'LibreOffice Calc for spreadsheets and LibreOffice Impress for presentations — data entry, formulas, formatting, shapes and images.', related:['es2','es4'], link:'#' },
+  { id:'es4', label:'ES 04', title:'Entrepreneurship', date:'Business & Startups', emoji:'🚀', color:'#8b5cf6', status:'pending', energy:0, desc:'Entrepreneurship concepts, types of entrepreneurs, opportunity identification, startups, initiative and organisational skills.', related:['es3','es5'], link:'#' },
+  { id:'es5', label:'ES 05', title:'Green Skills', date:'Sustainability', emoji:'🌱', color:'#10b981', status:'pending', energy:0, desc:'Green jobs in agriculture, transport, solar/wind energy, eco-tourism, construction and solid waste management.', related:['es4'], link:'#' },
+];
+
+let esAngle = 120;
+let esAutoRotate = true;
+let esActiveId = null;
+const esNodeEls = {};
+
+function buildESorbital(){
+  const wrap = document.getElementById('orbitalWrapES');
+  ES_UNITS.forEach((u) => {
+    const el = document.createElement('div');
+    el.className = 'orb-node';
+    el.id = 'esnode-' + u.id;
+    el.style.setProperty('--node-color', u.color);
+    el.innerHTML = `
+      <div class="orb-node-icon">${u.emoji}</div>
+      <div class="orb-node-label">
+        <span class="orb-node-num">${u.label}</span>
+        <span class="orb-node-name">${u.title.split(' ').slice(0,2).join(' ')}</span>
+      </div>
+    `;
+    el.addEventListener('click', e => { e.stopPropagation(); toggleESNode(u.id); });
+    wrap.appendChild(el);
+    esNodeEls[u.id] = el;
+  });
+  wrap.addEventListener('click', () => { if(esActiveId !== null) closeESAll(); });
+  startESRotation();
+}
+
+function positionESNodes(){
+  const isMobile = window.innerWidth < 640;
+  const R = isMobile ? 140 : 178;
+  ES_UNITS.forEach((u, i) => {
+    const a = ((i / ES_UNITS.length) * 360 + esAngle) % 360;
+    const rad = (a * Math.PI) / 180;
+    const x = R * Math.cos(rad);
+    const y = R * Math.sin(rad);
+    const depth = (1 + Math.sin(rad)) / 2;
+    const z = Math.round(50 + 40 * depth);
+    const op = esActiveId !== null ? (esActiveId === u.id ? 1 : 0.4) : Math.max(0.35, 0.35 + 0.65 * depth);
+    const el = esNodeEls[u.id];
+    if(!el) return;
+    el.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    el.style.zIndex = esActiveId === u.id ? 200 : z;
+    el.style.opacity = op;
+  });
+}
+
+function startESRotation(){
+  let last = 0;
+  function tick(ts){
+    if(esAutoRotate){
+      const dt = ts - last;
+      esAngle = (esAngle + dt * 0.014) % 360;
+    }
+    last = ts;
+    positionESNodes();
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function toggleESNode(id){
+  if(esActiveId === id){ closeESAll(); return; }
+  closeESAll(false);
+  esActiveId = id;
+  esAutoRotate = false;
+  esNodeEls[id].classList.add('active');
+  const unit = ES_UNITS.find(u => u.id === id);
+  unit.related.forEach(rid => { if(esNodeEls[rid]) esNodeEls[rid].classList.add('related'); });
+  const statusClass = { completed:'status-completed', 'in-progress':'status-in-progress', pending:'status-pending' }[unit.status];
+  const statusText = { completed:'Complete', 'in-progress':'In Progress', pending:'Coming Soon' }[unit.status];
+  const connBtns = unit.related.map(rid => {
+    const r = ES_UNITS.find(u => u.id === rid);
+    return `<button class="orb-conn-btn" onclick="event.stopPropagation();toggleESNode('${rid}')">${r.emoji} ${r.label} →</button>`;
+  }).join('');
+  const card = document.createElement('div');
+  card.className = 'orb-card';
+  card.id = 'es-orb-card-' + id;
+  const linkHtml = unit.link !== '#'
+    ? `<a href="${unit.link}" class="orb-open-link" onclick="event.stopPropagation()">Open Full Unit Guide →</a>`
+    : `<div class="orb-open-link" style="opacity:.5;cursor:default;background:var(--border);color:var(--text-muted);">Coming Soon</div>`;
+  card.innerHTML = `
+    <div class="orb-card-stem"></div>
+    <div class="orb-card-head">
+      <span class="orb-card-status ${statusClass}">${statusText}</span>
+      <span class="orb-card-date">${unit.date}</span>
+      <div class="orb-card-title">${unit.title}</div>
+    </div>
+    <div class="orb-card-body">
+      <div class="orb-card-text">${unit.desc}</div>
+      <div class="orb-energy">
+        <div class="orb-energy-label"><span>⚡ Progress</span><span>${unit.energy}%</span></div>
+        <div class="orb-energy-bar"><div class="orb-energy-fill" style="width:0%"></div></div>
+      </div>
+      ${connBtns ? `<div class="orb-connected"><div class="orb-connected-label">Connected Nodes</div><div class="orb-connected-btns">${connBtns}</div></div>` : ''}
+      ${linkHtml}
+    </div>
+  `;
+  esNodeEls[id].appendChild(card);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const fill = card.querySelector('.orb-energy-fill');
+    if(fill) fill.style.width = unit.energy + '%';
+  }));
+  positionESNodes();
+}
+
+function closeESAll(resume=true){
+  if(esActiveId !== null){
+    const card = document.getElementById('es-orb-card-' + esActiveId);
+    if(card) card.remove();
+    if(esNodeEls[esActiveId]) esNodeEls[esActiveId].classList.remove('active');
+  }
+  Object.values(esNodeEls).forEach(el => el.classList.remove('active','related'));
+  esActiveId = null;
+  if(resume) esAutoRotate = true;
+}
+
+buildESorbital();
 
 /* ════════════════════════════════════
    QUIZ DATA
