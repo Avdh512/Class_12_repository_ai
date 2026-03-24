@@ -116,6 +116,19 @@ tr:hover td{background:var(--surface2);color:var(--text);}
 .acronym-letter{width:40px;height:40px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;flex-shrink:0;font-family:'Playfair Display',serif;}
 .acronym-text h5{font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:.2rem;}
 .acronym-text p{font-size:.84rem;color:var(--text-muted);}
+/* example box */
+.ex-box{background:var(--surface2);border:1px dashed var(--border);border-radius:11px;padding:1rem 1.4rem;margin:1rem 0;font-size:.88rem;color:var(--text-muted);line-height:1.9;}
+.ex-box strong{color:var(--text);}
+.ex-box em{color:var(--accent);font-style:normal;font-weight:600;}
+/* sentence diagram */
+.sent-diagram{display:flex;gap:0;margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1.5px solid var(--border);}
+.sent-part{flex:1;padding:1rem 1.2rem;text-align:center;border-right:1px solid var(--border);}
+.sent-part:last-child{border-right:none;}
+.sent-part .sp-label{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem;}
+.sent-part .sp-word{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;}
+.sp-subj{background:color-mix(in srgb,var(--accent) 10%,var(--surface));}.sp-subj .sp-label{color:var(--accent);}.sp-subj .sp-word{color:var(--accent);}
+.sp-verb{background:color-mix(in srgb,var(--accent2) 10%,var(--surface));}.sp-verb .sp-label{color:var(--accent2);}.sp-verb .sp-word{color:var(--accent2);}
+.sp-obj{background:color-mix(in srgb,var(--accent4) 10%,var(--surface));}.sp-obj .sp-label{color:var(--accent4);}.sp-obj .sp-word{color:var(--accent4);}
 #assessment{padding:5rem 0 4rem;border-top:1px solid var(--border);}
 .aw{background:linear-gradient(135deg,var(--surface),color-mix(in srgb,var(--accent) 7%,var(--surface)));border:1.5px solid color-mix(in srgb,var(--accent) 28%,var(--border));border-radius:22px;padding:2.8rem;transition:all var(--tr);}
 .a-title{font-family:'Playfair Display',serif;font-weight:900;font-size:2.1rem;letter-spacing:-.5px;margin-bottom:.35rem;color:var(--text);transition:color var(--tr);}
@@ -145,7 +158,7 @@ tr:hover td{background:var(--surface2);color:var(--text);}
 footer{text-align:center;padding:3rem 2rem;color:var(--text-muted);font-size:.82rem;border-top:1px solid var(--border);transition:all var(--tr);}
 footer span{color:var(--accent);}
 .divider{height:1px;background:var(--border);margin:2rem 0;transition:background var(--tr);}
-@media(max-width:640px){.opts{grid-template-columns:1fr;}.nav-links{display:none;}.aw{padding:1.4rem;}.tlabel{display:none;}}
+@media(max-width:640px){.opts{grid-template-columns:1fr;}.nav-links{display:none;}.aw{padding:1.4rem;}.tlabel{display:none;}.sent-diagram{flex-direction:column;}.sent-part{border-right:none;border-bottom:1px solid var(--border);}.sent-part:last-child{border-bottom:none;}}
 </style>
 </head>
 <body>
@@ -168,6 +181,10 @@ footer span{color:var(--accent);}
     <a href="#listening">Active Listening</a>
     <a href="#speech">Parts of Speech</a>
     <a href="#sentences">Writing Sentences</a>
+    <a href="#objects">Direct &amp; Indirect Objects</a>
+    <a href="#voice">Active vs Passive</a>
+    <a href="#senttypes">Sentence Types</a>
+    <a href="#paragraphs">Paragraphs</a>
     <a href="#assessment">Assessment</a>
   </div>
   <div class="nav-fade"></div>
@@ -177,23 +194,28 @@ footer span{color:var(--accent);}
   <div class="hero-inner">
     <div class="badge">Employability Skills · Unit 01 · Class XII · CBSE</div>
     <h1><span>Communication</span><br>Skills</h1>
-    <p>Master active listening, parts of speech, and sentence construction — the building blocks of effective workplace communication.</p>
+    <p>Master active listening, parts of speech, sentence construction, voice, and paragraph writing — the complete building blocks of effective workplace communication.</p>
     <div class="chips">
       <a href="#overview" class="chip">📋 Overview</a>
       <a href="#listening" class="chip">👂 Active Listening</a>
       <a href="#speech" class="chip">📝 Parts of Speech</a>
       <a href="#sentences" class="chip">✍️ Writing Sentences</a>
+      <a href="#objects" class="chip">🎯 Direct &amp; Indirect Objects</a>
+      <a href="#voice" class="chip">🔄 Active vs Passive</a>
+      <a href="#senttypes" class="chip">🗂️ Sentence Types</a>
+      <a href="#paragraphs" class="chip">📄 Paragraphs</a>
       <a href="#assessment" class="chip">✅ Assessment</a>
     </div>
   </div>
 </section>
 
+<!-- ===== OVERVIEW ===== -->
 <section class="topic" id="overview">
 <div class="container">
   <div class="s-tag">Unit 1 — Overview</div>
   <div class="s-title">Communication Skills</div>
   <div class="s-intro">
-    Communication is a <strong>two-way process</strong> through which information or messages are exchanged between individuals using language, symbols, signs or behaviour. Speaking, listening, reading and writing are the four key skills of communication that help us understand others and express ourselves.
+    Communication is a <strong>two-way process</strong> through which information or messages are exchanged between individuals using language, symbols, signs or behaviour. Effective communication skills help us communicate the message <strong>correctly, precisely and completely</strong>. Lack of communication skills can result in confusion, frustration, wasted effort and missed opportunities.
   </div>
   <div class="ig">
     <div class="ic">
@@ -211,24 +233,31 @@ footer span{color:var(--accent);}
     <div class="ic">
       <h4>Ideal Message Qualities</h4>
       <ul>
-        <li><strong>Clear</strong> — conveys exact meaning</li><li><strong>Concise</strong> — appropriately brief</li><li><strong>Accurate</strong> — factually correct & verifiable</li>
+        <li><strong>Clear</strong> — conveys exact meaning</li><li><strong>Concise</strong> — appropriately brief</li><li><strong>Accurate</strong> — factually correct &amp; verifiable</li>
       </ul>
     </div>
   </div>
+
+  <h3 class="sh">What Makes a Message Clear, Concise &amp; Accurate?</h3>
+  <p class="bd">A <strong>clear</strong> statement conveys the exact message you are trying to send. Compare: <em>"Please allow me to reach office at 11 AM on Tuesday"</em> (clear — time is specified) vs <em>"Please allow me to reach late"</em> (vague).</p>
+  <p class="bd">A <strong>concise</strong> statement is appropriately brief and to the point — avoid adding information that belongs to a different forum or time.</p>
+  <p class="bd">An <strong>accurate</strong> statement is factual and verifiable. Compare: <em>"50 per cent of the books have been completed"</em> (accurate — measurable) vs <em>"most of the books have been completed"</em> (vague).</p>
+
   <div class="cards">
-    <div class="card"><div class="icon">🗣️</div><h4>Session 1</h4><p>Active Listening — RESPECT model, stages and barriers to listening.</p></div>
-    <div class="card"><div class="icon">📖</div><h4>Session 2</h4><p>Parts of Speech — nouns, pronouns, verbs, adjectives, adverbs and supporting parts.</p></div>
-    <div class="card"><div class="icon">✍️</div><h4>Session 3</h4><p>Writing Sentences — active/passive voice, sentence types, paragraphs.</p></div>
+    <div class="card"><div class="icon">🗣️</div><h4>Session 1</h4><p>Active Listening — listening skill, RESPECT model, stages and barriers to listening.</p></div>
+    <div class="card"><div class="icon">📖</div><h4>Session 2</h4><p>Parts of Speech — nouns, pronouns, verbs, adjectives, adverbs, capitalisation (MINTS), punctuation, and supporting parts.</p></div>
+    <div class="card"><div class="icon">✍️</div><h4>Session 3</h4><p>Writing Sentences — simple/complex sentences, parts of a sentence, direct &amp; indirect objects, active/passive voice, sentence types, paragraphs.</p></div>
   </div>
 </div>
 </section>
 
+<!-- ===== SESSION 1: ACTIVE LISTENING ===== -->
 <section class="topic" id="listening">
 <div class="container">
   <div class="s-tag">Session 1</div>
   <div class="s-title">Active Listening</div>
   <div class="s-intro">
-    Active listening is an art that comprises <strong>a desire to comprehend</strong> as well as offer support and empathy to the speaker. It can affect your job effectiveness, the quality of your relationships, and your overall well-being.
+    Active listening is an art that comprises <strong>a desire to comprehend</strong> as well as offer support and empathy to the speaker. It can affect your job effectiveness, the quality of your relationships, and your overall well-being. Active listening allows you to understand problems and collaborate to develop solutions.
   </div>
 
   <h3 class="sh">Why Listening Matters</h3>
@@ -236,14 +265,51 @@ footer span{color:var(--accent);}
     <div class="card"><div class="icon">📡</div><h4>Obtain Information</h4><p>Listening attentively helps gather accurate, complete information from others.</p></div>
     <div class="card"><div class="icon">🤝</div><h4>Build Relationships</h4><p>Active listening builds and maintains strong personal and professional relationships.</p></div>
     <div class="card"><div class="icon">⚡</div><h4>Resolve Conflicts</h4><p>Listening carefully helps understand all perspectives and work towards resolution.</p></div>
-    <div class="card"><div class="icon">🎓</div><h4>Learn & Grow</h4><p>Attentive listening is the foundation of all learning and understanding.</p></div>
+    <div class="card"><div class="icon">🎓</div><h4>Learn &amp; Enjoy</h4><p>We listen to enjoy, to learn, and to understand — attentive listening is the foundation of all learning.</p></div>
+  </div>
+  <div class="warn"><strong>Note:</strong> Without the ability to listen attentively, messages can be easily misunderstood, communication breaks down, and the sender of the message can become frustrated or irritated.</div>
+
+  <h3 class="sh">Factors That Affect Active Listening</h3>
+  <div class="ig">
+    <div class="ic">
+      <h4>Eye Contact</h4>
+      <ul>
+        <li>A form of body language</li>
+        <li>Signals "I am listening to you"</li>
+        <li>Avoiding eye contact implies disinterest</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Gestures</h4>
+      <ul>
+        <li>Indicate to speaker if you are listening</li>
+        <li>Keep hands and feet still while talking</li>
+        <li>Open body language shows attentiveness</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Avoiding Distractions</h4>
+      <ul>
+        <li>Physically remove distractions</li>
+        <li>Reduce ringtone / switch off phone in meetings</li>
+        <li>Avoid glancing at wristwatch frequently</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Giving Feedback</h4>
+      <ul>
+        <li>Feedback can be positive or negative</li>
+        <li>Always be polite so the person is not hurt</li>
+        <li>Confirm understanding with relevant responses</li>
+      </ul>
+    </div>
   </div>
 
   <h3 class="sh">5 Stages of Active Listening</h3>
   <div class="steps">
     <div class="step"><div class="step-num">1</div><div class="step-body"><h5>Receiving</h5><p>Listening attentively to the speaker — giving full, undivided attention.</p></div></div>
     <div class="step"><div class="step-num">2</div><div class="step-body"><h5>Understanding</h5><p>An informed agreement about what is being communicated — comprehending the message.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h5>Remembering</h5><p>Retrieving or recalling information from what has been said.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h5>Remembering</h5><p>Retrieving or recalling information — the retrieval of some information from the past.</p></div></div>
     <div class="step"><div class="step-num">4</div><div class="step-body"><h5>Evaluating</h5><p>Judging the value, quantity, importance and amount of what was said.</p></div></div>
     <div class="step"><div class="step-num">5</div><div class="step-body"><h5>Responding</h5><p>Saying or doing something as a meaningful response to what was communicated.</p></div></div>
   </div>
@@ -251,28 +317,29 @@ footer span{color:var(--accent);}
   <h3 class="sh">The RESPECT Model</h3>
   <p class="bd">Use the acronym <strong>RESPECT</strong> to ensure active listening in any situation:</p>
   <div class="acronym-box">
-    <div class="acronym-row"><div class="acronym-letter">R</div><div class="acronym-text"><h5>Remove Distractions</h5><p>Reduce the volume of TV, radio or mobile phone while talking to a person.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">R</div><div class="acronym-text"><h5>Remove Distractions</h5><p>Reduce the volume of television, radio or mobile phone while talking to a person.</p></div></div>
     <div class="acronym-row"><div class="acronym-letter">E</div><div class="acronym-text"><h5>Eye Contact</h5><p>Look at the speaker while listening — it signals genuine attention.</p></div></div>
-    <div class="acronym-row"><div class="acronym-letter">S</div><div class="acronym-text"><h5>Show You're Listening</h5><p>Use gestures, nods, and open body language to show attentiveness.</p></div></div>
-    <div class="acronym-row"><div class="acronym-letter">P</div><div class="acronym-text"><h5>Pay Attention</h5><p>Focus entirely on what the speaker is saying — not on your reply.</p></div></div>
-    <div class="acronym-row"><div class="acronym-letter">E</div><div class="acronym-text"><h5>Empathise</h5><p>Share the feelings of the speaker — imagine yourself in their situation.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">S</div><div class="acronym-text"><h5>Show You're Listening</h5><p>Use gestures, nods, and open body language to show attentiveness to the speaker.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">P</div><div class="acronym-text"><h5>Pay Attention</h5><p>Focus entirely on what the speaker is saying — not on planning your reply.</p></div></div>
+    <div class="acronym-row"><div class="acronym-letter">E</div><div class="acronym-text"><h5>Empathise</h5><p>Share the feelings of the speaker — imagine what it would be like to be in their situation.</p></div></div>
     <div class="acronym-row"><div class="acronym-letter">C</div><div class="acronym-text"><h5>Clarify Doubts</h5><p>Ask polite, relevant questions to clarify any doubts or misunderstandings.</p></div></div>
     <div class="acronym-row"><div class="acronym-letter">T</div><div class="acronym-text"><h5>Tune to Timing</h5><p>Wait for the speaker to finish before responding — never interrupt.</p></div></div>
   </div>
 
-  <h3 class="sh">Barriers to Active Listening</h3>
+  <h3 class="sh">Barriers to Active Listening &amp; How to Overcome Them</h3>
   <div class="tw">
     <table>
-      <tr><th>Barrier</th><th>How It Affects Listening</th><th>How to Overcome</th></tr>
-      <tr><td>Being Pre-occupied</td><td>Your mind wanders; you miss key points</td><td>Keep away phones; control emotions</td></tr>
-      <tr><td>Noise & Distractions</td><td>Cannot hear the speaker clearly</td><td>Create a quiet, conducive environment</td></tr>
-      <tr><td>Past Experiences / Bias</td><td>Prejudices filter and distort what you hear</td><td>Stay objective; avoid bias</td></tr>
-      <tr><td>Personal Feelings</td><td>Preconceptions about the speaker affect listening</td><td>Allow the speaker to finish; then respond</td></tr>
+      <tr><th>Barrier</th><th>How It Becomes a Barrier</th><th>How to Overcome It</th></tr>
+      <tr><td><strong>Being Pre-occupied</strong></td><td>When pre-occupied, you may not listen carefully; emotions take over your mind</td><td>Do not let emotions take over. Keep away phones and digital devices.</td></tr>
+      <tr><td><strong>Noise &amp; Visual Distractions</strong></td><td>You may not be able to hear the other person clearly in a noisy environment</td><td>Create a conducive environment to avoid misinterpretations and distractions.</td></tr>
+      <tr><td><strong>Past Experiences / Mindset</strong></td><td>Biases or prejudices based on past experiences distort what you hear</td><td>Avoid developing biases; be objective in your approach when interacting with others.</td></tr>
+      <tr><td><strong>Personal Factors</strong></td><td>Your personal feelings and preconceptions about the speaker affect your listening</td><td>Allow the other person to finish speaking, and then respond.</td></tr>
     </table>
   </div>
 </div>
 </section>
 
+<!-- ===== SESSION 2: PARTS OF SPEECH ===== -->
 <section class="topic" id="speech">
 <div class="container">
   <div class="s-tag">Session 2</div>
@@ -281,88 +348,273 @@ footer span{color:var(--accent);}
     In any language, <strong>parts of speech</strong> are categories of words based on their function within a sentence. They are the 'building blocks' of a language. A sentence always begins with a capital letter and ends with a full stop, question mark, or exclamation mark.
   </div>
 
-  <h3 class="sh">Basic Parts of Speech</h3>
-  <div class="tw">
-    <table>
-      <tr><th>Part of Speech</th><th>What It Does</th><th>Examples</th></tr>
-      <tr><td><strong>Noun</strong></td><td>Names a person, place, thing or idea</td><td>Dog, India, Sanjay</td></tr>
-      <tr><td><strong>Pronoun</strong></td><td>Used in place of a noun</td><td>I, They, He, You</td></tr>
-      <tr><td><strong>Adjective</strong></td><td>Describes a noun</td><td>Small, Blue, Sharp, Loud</td></tr>
-      <tr><td><strong>Verb</strong></td><td>Shows an action</td><td>Run, Eat, Think, Sit</td></tr>
-      <tr><td><strong>Adverb</strong></td><td>Adds meaning to a verb, adjective or adverb</td><td>Easily, Always, Inside, Before</td></tr>
-    </table>
-  </div>
-
-  <h3 class="sh">Supporting Parts of Speech</h3>
-  <div class="cards">
-    <div class="card"><div class="icon">📰</div><h4>Articles</h4><p>'a', 'an', 'the' — used before nouns. 'An' before vowel sounds, 'a' before consonant sounds, 'the' for specific nouns.</p></div>
-    <div class="card"><div class="icon">🔗</div><h4>Conjunctions</h4><p>Join two nouns, phrases or sentences. Common: 'and', 'or', 'but'.</p></div>
-    <div class="card"><div class="icon">📍</div><h4>Prepositions</h4><p>Connect words and show relationships. Answer 'where', 'when', 'how'. Common: 'on', 'at', 'under', 'in'.</p></div>
-    <div class="card"><div class="icon">❗</div><h4>Interjections</h4><p>Express strong emotions — happiness, surprise, anger or pain. Example: Wow! Oh! Thanks!</p></div>
-  </div>
+  <h3 class="sh">Sentence vs Phrase</h3>
+  <p class="bd">A <strong>sentence</strong> is a group of words that communicates a complete meaning, thought or action. Example: <em>Raju goes to school.</em></p>
+  <p class="bd">A <strong>phrase</strong> is a group of words that does NOT make complete sense. Example: <em>Raju goes.</em></p>
 
   <h3 class="sh">Capitalisation Rules — MINTS</h3>
-  <div class="hl"><strong>M</strong> — Months (June, December) · <strong>I</strong> — The letter 'I' · <strong>N</strong> — Names of people, places, rivers, mountains, days · <strong>T</strong> — Titles before names (Dr Shah, Mr Patel) · <strong>S</strong> — Starting letter of every sentence</div>
+  <div class="tw">
+    <table>
+      <tr><th>Letter</th><th>Rule</th><th>Example</th></tr>
+      <tr><td><strong>M — Months</strong></td><td>Capitalise the first letter of all month names</td><td>I will go to college in <em>June</em>.</td></tr>
+      <tr><td><strong>I — The letter 'I'</strong></td><td>Always capitalise 'I' when used as a word</td><td>Every day, <em>I</em> play tennis with him.</td></tr>
+      <tr><td><strong>N — Names</strong></td><td>First letter of names of people, places, rivers, seas, mountains, islands, days</td><td>This <em>Tuesday</em>, <em>Vidya</em> is in <em>Rajasthan</em>.</td></tr>
+      <tr><td><strong>T — Titles</strong></td><td>First letter of titles used before people's names</td><td><em>Dr</em> Shah and <em>Mr</em> Patel work together.</td></tr>
+      <tr><td><strong>S — Starting letter</strong></td><td>Capitalise the first letter of every sentence</td><td><em>The</em> cat ran out of the house.</td></tr>
+    </table>
+  </div>
 
   <h3 class="sh">Key Punctuation Marks</h3>
   <div class="tw">
     <table>
-      <tr><th>Mark</th><th>Symbol</th><th>Use</th></tr>
-      <tr><td>Full Stop</td><td>.</td><td>Ends a sentence; abbreviations</td></tr>
-      <tr><td>Comma</td><td>,</td><td>Indicates pause; separates list items</td></tr>
-      <tr><td>Question Mark</td><td>?</td><td>Ends a question</td></tr>
-      <tr><td>Exclamation Mark</td><td>!</td><td>Strong feeling — surprise, anger, joy</td></tr>
-      <tr><td>Apostrophe</td><td>'</td><td>Ownership (Divya's desk); contractions (let's)</td></tr>
+      <tr><th>Mark</th><th>Symbol</th><th>Use</th><th>Example</th></tr>
+      <tr><td>Full Stop</td><td>.</td><td>Ends a sentence; used in abbreviations (Prof.)</td><td>This is a sentence.</td></tr>
+      <tr><td>Comma</td><td>,</td><td>Indicates pause; separates list items (&gt;2 items)</td><td>I bought apples, oranges and grapes.</td></tr>
+      <tr><td>Question Mark</td><td>?</td><td>Ends a question</td><td>What is your designation?</td></tr>
+      <tr><td>Exclamation Mark</td><td>!</td><td>Strong feeling — surprise, shock or anger</td><td>What a pleasant surprise!</td></tr>
+      <tr><td>Apostrophe</td><td>'</td><td>Ownership (Divya's desk); contractions (let's, isn't)</td><td>That is Divya's desk.</td></tr>
     </table>
+  </div>
+  <div class="note"><strong>Full list:</strong> There are 15 basic punctuation marks in English — full stop, comma, question mark, exclamation mark, apostrophe, colon, semi-colon, dash, hyphen, parenthesis, quotation mark, bracket, brace, ellipsis, and bullet point.</div>
+
+  <h3 class="sh">Basic Parts of Speech</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Part of Speech</th><th>What It Does</th><th>Example in Sentence</th><th>Example Words</th></tr>
+      <tr><td><strong>Noun</strong></td><td>Names a person, place, thing or idea — 'naming words'</td><td>"Reema wrote a letter." — <em>Reema</em> and <em>letter</em> are nouns.</td><td>Dog, India, Sanjay</td></tr>
+      <tr><td><strong>Pronoun</strong></td><td>Used in place of a noun</td><td>"She is tired." — <em>She</em> is used in place of Reema.</td><td>I, They, He, You</td></tr>
+      <tr><td><strong>Adjective</strong></td><td>Describes a noun</td><td>"Reema wrote a <em>long</em> letter." — <em>long</em> describes letter.</td><td>Small, Blue, Sharp, Loud</td></tr>
+      <tr><td><strong>Verb</strong></td><td>Shows action</td><td>"Reema <em>wrote</em> a letter." — <em>wrote</em> is the action.</td><td>Run, Eat, Think, Sit</td></tr>
+      <tr><td><strong>Adverb</strong></td><td>Adds meaning to a verb, adjective, or other adverb — answers how? how often? when? where?</td><td>"Reema <em>quickly</em> wrote a letter." — <em>quickly</em> tells how.</td><td>Easily, Always, Inside, Before</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sh">Same Word, Different Parts of Speech</h3>
+  <div class="ex-box">
+    <strong>Will you book a movie for 3 pm?</strong> — 'Book' is used as a <em>verb</em>.<br>
+    <strong>I need to find my English book.</strong> — 'Book' is a <em>noun</em>.<br><br>
+    <strong>His total cricket score was 145.</strong> — 'Total' is an <em>adjective</em>.<br>
+    <strong>That is totally awesome.</strong> — 'Totally' is an <em>adverb</em>.<br><br>
+    <strong>She is always watching a football match.</strong> — 'Football' is an <em>adjective</em>.<br>
+    <strong>She got a new football for her birthday.</strong> — 'Football' is a <em>noun</em>.<br><br>
+    <strong>Kapil promised his father he will be a good boy.</strong> — 'Promised' is a <em>verb</em>.<br>
+    <strong>Kapil was unable to keep the promise.</strong> — 'Promise' is a <em>noun</em>.
+  </div>
+
+  <h3 class="sh">Supporting Parts of Speech</h3>
+  <p class="bd">Along with the main parts of speech, there are connecting words needed to join words, phrases, clauses or sentences. These are called <strong>supporting parts of speech</strong>.</p>
+  <div class="cards">
+    <div class="card"><div class="icon">📰</div><h4>Articles</h4><p>'a', 'an', 'the' — used before nouns. Use <em>an</em> before vowel sounds, <em>a</em> before consonant sounds, <em>the</em> for specific nouns. Example: <em>a book, an apple, an umbrella, the sun.</em></p></div>
+    <div class="card"><div class="icon">🔗</div><h4>Conjunctions</h4><p>Join two nouns, phrases or sentences. Common: 'and', 'or', 'but'. Example: <em>Sheela and I went to the market. Do you want oranges or apples?</em></p></div>
+    <div class="card"><div class="icon">📍</div><h4>Prepositions</h4><p>Connect words and show relationships. Answer 'where', 'when', 'how'. Common: 'on', 'at', 'under', 'in'. Example: <em>The cat is on the roof. I live in Delhi.</em></p></div>
+    <div class="card"><div class="icon">❗</div><h4>Interjections</h4><p>Express strong emotions — happiness, surprise, anger or pain. Always have an exclamation mark. Example: <em>Wow! Oh! Oh no! Thanks! Help!</em></p></div>
   </div>
 </div>
 </section>
 
+<!-- ===== SESSION 3: WRITING SENTENCES ===== -->
 <section class="topic" id="sentences">
 <div class="container">
   <div class="s-tag">Session 3</div>
   <div class="s-title">Writing Sentences</div>
   <div class="s-intro">
-    A sentence is a group of words which together expresses a <strong>complete idea</strong>. Every sentence has a subject (who does the action), a verb (the action), and often an object (what receives the action).
+    A sentence is a group of words which together expresses a <strong>complete idea</strong> that has meaning. A sentence is formed by putting together a group of words in sequence so that it is understood by others. Every sentence has a subject and a verb; most also have an object.
+  </div>
+
+  <h3 class="sh">Simple vs Complex Sentences</h3>
+  <div class="ig">
+    <div class="ic">
+      <h4>Simple Sentence</h4>
+      <ul>
+        <li>Has only one subject and one predicate</li>
+        <li>Contains only one finite verb</li>
+        <li>Example: <em>Nisha sells a laptop.</em></li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Complex Sentence</h4>
+      <ul>
+        <li>Consists of two or more coordinate clauses</li>
+        <li>Joined by a coordinating conjunction</li>
+        <li>Example: <em>She packed the product and sent it.</em></li>
+      </ul>
+    </div>
   </div>
 
   <h3 class="sh">Parts of a Sentence</h3>
-  <div class="ig">
-    <div class="ic"><h4>Subject</h4><ul><li>Person/thing that performs the action</li><li>Ask "Who did the action?"</li><li>Example: <em>Nisha</em> sells a laptop</li></ul></div>
-    <div class="ic"><h4>Verb</h4><ul><li>Describes the action</li><li>Ask "What is the action?"</li><li>Example: Nisha <em>sells</em> a laptop</li></ul></div>
-    <div class="ic"><h4>Object</h4><ul><li>Receives the action</li><li>Ask "What received the action?"</li><li>Example: Nisha sells <em>a laptop</em></li></ul></div>
+  <p class="bd">Almost all sentences have a subject and a verb; some also have an object:</p>
+  <div class="sent-diagram">
+    <div class="sent-part sp-subj"><div class="sp-label">Subject</div><div class="sp-word">Nisha</div><div style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem;">Who performed the action?</div></div>
+    <div class="sent-part sp-verb"><div class="sp-label">Verb</div><div class="sp-word">Sells</div><div style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem;">What is the action?</div></div>
+    <div class="sent-part sp-obj"><div class="sp-label">Object</div><div class="sp-word">a Laptop</div><div style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem;">What received the action?</div></div>
+  </div>
+  <div class="tw">
+    <table>
+      <tr><th>Sentence</th><th>Subject</th><th>Verb</th><th>Object</th></tr>
+      <tr><td>I wrote a letter.</td><td>I</td><td>wrote</td><td>a letter</td></tr>
+      <tr><td>He called the customer.</td><td>He</td><td>called</td><td>the customer</td></tr>
+      <tr><td>She packed the product.</td><td>She</td><td>packed</td><td>the product</td></tr>
+      <tr><td>Dia and Sanjay booked a cab.</td><td>Dia and Sanjay</td><td>booked</td><td>a cab</td></tr>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ===== DIRECT & INDIRECT OBJECTS ===== -->
+<section class="topic" id="objects">
+<div class="container">
+  <div class="s-tag">Session 3 — Continued</div>
+  <div class="s-title">Direct &amp; Indirect Objects</div>
+  <div class="s-intro">
+    The object in a sentence can be either <strong>direct</strong> or <strong>indirect</strong>. Understanding the difference helps you construct precise, meaningful sentences.
   </div>
 
-  <h3 class="sh">Active vs Passive Voice</h3>
+  <h3 class="sh">Direct Object</h3>
+  <p class="bd">A direct object is directly 'acted on' by the verb. It answers the question <strong>"What?"</strong></p>
+  <div class="ex-box">Example: <strong>Nisha sells a laptop.</strong> → What does Nisha sell? → <em>a laptop</em> (direct object).</div>
+
+  <h3 class="sh">Indirect Object</h3>
+  <p class="bd">An indirect object answers the questions <strong>"To whom?"</strong> or <strong>"For whom?"</strong> Some sentences only have direct objects; some have both direct and indirect objects.</p>
+  <div class="ex-box">Example: <strong>Abdul gave a gift to his mother.</strong><br>
+  Verb: <em>gave</em> → What did Abdul give? → <em>a gift</em> (direct object) → To whom? → <em>his mother</em> (indirect object).</div>
+
+  <h3 class="sh">Examples: Direct and Indirect Objects</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Sentence</th><th>Verb</th><th>Direct Object</th><th>Indirect Object</th></tr>
+      <tr><td>Reema bought stationery.</td><td>bought</td><td>stationery</td><td>—</td></tr>
+      <tr><td>Fatima and Sonia played tennis.</td><td>played</td><td>tennis</td><td>—</td></tr>
+      <tr><td>He offered a coffee to me.</td><td>offered</td><td>coffee</td><td>me</td></tr>
+      <tr><td>The manager assigned us projects.</td><td>assigned</td><td>projects</td><td>us</td></tr>
+    </table>
+  </div>
+  <div class="note"><strong>Key:</strong> A direct object answers "What?" while an indirect object answers "To whom?" or "For whom?". Some sentences only have direct objects, while others have both.</div>
+</div>
+</section>
+
+<!-- ===== ACTIVE VS PASSIVE VOICE ===== -->
+<section class="topic" id="voice">
+<div class="container">
+  <div class="s-tag">Session 3 — Continued</div>
+  <div class="s-title">Active &amp; Passive Voice</div>
+  <div class="s-intro">
+    Sentences can be classified based on whether the subject <strong>does</strong> the action or <strong>receives</strong> the action. This gives us active and passive voice.
+  </div>
+
+  <h3 class="sh">Active Voice</h3>
+  <p class="bd">Sentences where the <strong>subject does the action</strong> are in <strong>active voice</strong>.</p>
+
+  <h3 class="sh">Passive Voice</h3>
+  <p class="bd">Sentences where the <strong>subject receives the action</strong> are in <strong>passive voice</strong>.</p>
+
+  <div class="ex-box">
+    Compare:<br>
+    <strong>1. Sanjay broke the glass.</strong> → Subject (Sanjay) <em>does</em> the action → <em>Active voice</em><br>
+    <strong>2. The glass was broken by Sanjay.</strong> → Subject (the glass) <em>receives</em> the action → <em>Passive voice</em>
+  </div>
+
   <div class="tw">
     <table>
       <tr><th>Active Voice</th><th>Passive Voice</th></tr>
       <tr><td>She wrote an email.</td><td>An email was written by her.</td></tr>
-      <tr><td>He opened the door.</td><td>The door was opened by him.</td></tr>
+      <tr><td>He opened the door for the customer.</td><td>The door was opened by him for the customer.</td></tr>
       <tr><td>Mohan sold a bike.</td><td>The bike was sold by Mohan.</td></tr>
+      <tr><td>I did not beat him.</td><td>He was not beaten by me.</td></tr>
+      <tr><td>Kapil made a profit yesterday.</td><td>A profit was made by Kapil yesterday.</td></tr>
+      <tr><td>The tiger was chasing the deer.</td><td>The deer was being chased by the tiger.</td></tr>
     </table>
   </div>
   <div class="note"><strong>Key Rule:</strong> In active voice, the subject <em>does</em> the action. In passive voice, the subject <em>receives</em> the action.</div>
-
-  <h3 class="sh">Four Types of Sentences</h3>
-  <div class="cards">
-    <div class="card"><div class="icon">📢</div><h4>Declarative</h4><p>Provides information or states a fact. Ends with a full stop. <em>"I go to office."</em></p></div>
-    <div class="card"><div class="icon">❓</div><h4>Interrogative</h4><p>Asks a question. Ends with a question mark. <em>"Did you go to office?"</em></p></div>
-    <div class="card"><div class="icon">😮</div><h4>Exclamatory</h4><p>Expresses strong emotion. Ends with an exclamation mark. <em>"Oh, it's very cold!"</em></p></div>
-    <div class="card"><div class="icon">👉</div><h4>Imperative</h4><p>Shows an order, command or request. <em>"Wear your sweater."</em></p></div>
-  </div>
-
-  <h3 class="sh">Writing Paragraphs</h3>
-  <p class="bd">A group of sentences forms a paragraph. All sentences in a paragraph must share a <strong>common idea</strong>. When you want to write about a different idea, start a new paragraph. Good paragraphs have a clear topic sentence, supporting details, and a concluding thought.</p>
-  <div class="hl"><strong>Tip:</strong> Practice writing paragraphs on topics you know — your school, a favourite hobby, or a career you aspire to. Focus on using all four sentence types correctly.</div>
 </div>
 </section>
 
+<!-- ===== TYPES OF SENTENCES ===== -->
+<section class="topic" id="senttypes">
+<div class="container">
+  <div class="s-tag">Session 3 — Continued</div>
+  <div class="s-title">Types of Sentences</div>
+  <div class="s-intro">
+    There are mainly <strong>four types of sentences</strong> — declarative, interrogative, exclamatory, and imperative. Each has a different purpose and ends with a specific punctuation mark.
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="icon">📢</div><h4>Declarative (Statement)</h4><p>Provides information or states a fact. Most common type. Ends with a <strong>full stop (.)</strong>.<br><em>"I go to office."</em><br><em>"It is very cold."</em><br><em>"I completed my project."</em></p></div>
+    <div class="card"><div class="icon">❓</div><h4>Interrogative (Question)</h4><p>Asks a question. Ends with a <strong>question mark (?)</strong>.<br><em>"Did you go to office?"</em><br><em>"How is the weather?"</em><br><em>"Did you complete your project?"</em></p></div>
+    <div class="card"><div class="icon">😮</div><h4>Exclamatory (Emotion)</h4><p>Expresses strong emotion — joy, sadness, fear or wonder. Ends with an <strong>exclamation mark (!)</strong>.<br><em>"Oh, it's very cold!"</em><br><em>"I completed my project!"</em><br><em>"No way! I don't want a tattoo!"</em></p></div>
+    <div class="card"><div class="icon">👉</div><h4>Imperative (Order)</h4><p>Shows an order, command, request or advice. Can end with a <strong>full stop or exclamation mark (. or !)</strong>.<br><em>"Wear your sweater."</em><br><em>"Complete your project."</em><br><em>"Get out of the bed immediately!"</em></p></div>
+  </div>
+
+  <h3 class="sh">More Examples</h3>
+  <div class="tw">
+    <table>
+      <tr><th>Sentence</th><th>Type</th></tr>
+      <tr><td>Where is my I-card?</td><td>Interrogative</td></tr>
+      <tr><td>My arms ache from planting those saplings!</td><td>Exclamatory</td></tr>
+      <tr><td>Reading mythology will make you more aware.</td><td>Declarative</td></tr>
+      <tr><td>Come with us right now.</td><td>Imperative</td></tr>
+      <tr><td>No way! I don't want a tattoo!</td><td>Exclamatory</td></tr>
+      <tr><td>Get out of the bed immediately!</td><td>Imperative</td></tr>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ===== PARAGRAPHS ===== -->
+<section class="topic" id="paragraphs">
+<div class="container">
+  <div class="s-tag">Session 3 — Continued</div>
+  <div class="s-title">Writing Paragraphs</div>
+  <div class="s-intro">
+    A <strong>group of sentences</strong> forms a paragraph. All sentences in a paragraph must share a <strong>common idea</strong>. When you want to write about a different idea, start a new paragraph.
+  </div>
+
+  <h3 class="sh">How to Write a Good Paragraph</h3>
+  <p class="bd">When writing a paragraph, ensure all sentences relate to the same central idea. For example, if you are writing about your school, the first paragraph can contain sentences about the name, location, size and other details. In the next paragraph, you can describe what you like about it.</p>
+
+  <div class="ex-box">
+    <strong>Example paragraph:</strong><br><br>
+    I go to Government Higher Secondary School, Balachadi. It is not a very big school but has many good teachers. There are about 100 students in my school. My school is on the main road, very close to the city railway station.<br><br>
+    I love going to school and learning about new things. My school has a small playground, where I play cricket with my friends after the classes are over. It has a library also. I love my school.
+  </div>
+
+  <div class="hl"><strong>Tip:</strong> Practice writing paragraphs on topics you know — your school, a favourite hobby, or a career you aspire to. Focus on using all four sentence types correctly and ensuring all sentences in a paragraph share a single common idea.</div>
+
+  <h3 class="sh">Summary — Session 3 Learning Outcomes</h3>
+  <div class="ig">
+    <div class="ic">
+      <h4>Parts of a Sentence</h4>
+      <ul>
+        <li>Identify subject, verb and object</li>
+        <li>Distinguish direct vs indirect objects</li>
+        <li>Understand simple and complex sentences</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Voice</h4>
+      <ul>
+        <li>Differentiate active and passive voice</li>
+        <li>Convert sentences between voices</li>
+        <li>Know which subject does vs receives action</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Sentences &amp; Paragraphs</h4>
+      <ul>
+        <li>Compose declarative, interrogative, exclamatory, imperative sentences</li>
+        <li>Write well-structured paragraphs</li>
+        <li>Use all punctuation rules correctly</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== ASSESSMENT ===== -->
 <section id="assessment">
 <div class="container">
   <div class="aw">
     <div class="a-title">Assessment</div>
-    <div class="a-sub">Test your understanding of Communication Skills — Unit 01</div>
+    <div class="a-sub">Test your understanding of all topics in Communication Skills — Unit 01</div>
 
     <div class="qlabel">Multiple Choice Questions</div>
 
@@ -377,12 +629,12 @@ footer span{color:var(--accent);}
     </div>
 
     <div class="mcq" id="m2">
-      <div class="mcq-q"><em>Q2.</em> In the RESPECT model, what does 'E' stand for (second E)?</div>
+      <div class="mcq-q"><em>Q2.</em> Which of the following can be a barrier to active listening?</div>
       <div class="opts">
-        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">A</span>Eye contact</div>
-        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">B</span>Evaluate before responding</div>
-        <div class="opt" onclick="pick('m2',this,true)"><span class="ltr">C</span>Empathise with the speaker</div>
-        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">D</span>Express your opinion clearly</div>
+        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">A</span>Noisy environment</div>
+        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">B</span>Not maintaining eye contact</div>
+        <div class="opt" onclick="pick('m2',this,false)"><span class="ltr">C</span>Not being attentive</div>
+        <div class="opt" onclick="pick('m2',this,true)"><span class="ltr">D</span>All of the above</div>
       </div>
     </div>
 
@@ -416,20 +668,65 @@ footer span{color:var(--accent);}
       </div>
     </div>
 
+    <div class="mcq" id="m6">
+      <div class="mcq-q"><em>Q6.</em> Identify the subject in the sentence: "The children played football."</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m6',this,true)"><span class="ltr">A</span>The children</div>
+        <div class="opt" onclick="pick('m6',this,false)"><span class="ltr">B</span>children played</div>
+        <div class="opt" onclick="pick('m6',this,false)"><span class="ltr">C</span>played</div>
+        <div class="opt" onclick="pick('m6',this,false)"><span class="ltr">D</span>football</div>
+      </div>
+    </div>
+
+    <div class="mcq" id="m7">
+      <div class="mcq-q"><em>Q7.</em> Which sentence has both a direct AND indirect object?</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m7',this,false)"><span class="ltr">A</span>I am working on a presentation.</div>
+        <div class="opt" onclick="pick('m7',this,false)"><span class="ltr">B</span>She bought a blue pen.</div>
+        <div class="opt" onclick="pick('m7',this,false)"><span class="ltr">C</span>The girls played cricket.</div>
+        <div class="opt" onclick="pick('m7',this,true)"><span class="ltr">D</span>He wrote a letter to his sister.</div>
+      </div>
+    </div>
+
+    <div class="mcq" id="m8">
+      <div class="mcq-q"><em>Q8.</em> What are the characteristics of an ideal message?</div>
+      <div class="opts">
+        <div class="opt" onclick="pick('m8',this,false)"><span class="ltr">A</span>Clear only</div>
+        <div class="opt" onclick="pick('m8',this,false)"><span class="ltr">B</span>Concise only</div>
+        <div class="opt" onclick="pick('m8',this,false)"><span class="ltr">C</span>Accurate only</div>
+        <div class="opt" onclick="pick('m8',this,true)"><span class="ltr">D</span>All of the above</div>
+      </div>
+    </div>
+
     <div class="qlabel">Short Answer Questions</div>
     <div class="qa">
-      <div class="qa-q"><em>Q6.</em> What are the three qualities of an ideal message? Give an example of each.</div>
-      <button class="rbtn" onclick="toggleAns('a6')">Show Answer</button>
-      <div class="ans" id="a6">An ideal message should be: (1) <strong>Clear</strong> — conveys the exact meaning, e.g., "Please allow me to reach office at 11 AM on Tuesday." (2) <strong>Concise</strong> — appropriately brief and to the point, avoiding unnecessary information. (3) <strong>Accurate</strong> — factually correct and verifiable, e.g., "50 per cent of the books have been completed" rather than "most books."</div>
+      <div class="qa-q"><em>Q9.</em> What are the three qualities of an ideal message? Give an example of each.</div>
+      <button class="rbtn" onclick="toggleAns('a9')">Show Answer</button>
+      <div class="ans" id="a9">An ideal message should be: (1) <strong>Clear</strong> — conveys the exact meaning, e.g., "Please allow me to reach office at 11 AM on Tuesday, 11 June 2019." (2) <strong>Concise</strong> — appropriately brief and to the point, avoiding unnecessary information. The manager's reply "Alright, you may come late" is concise. (3) <strong>Accurate</strong> — factually correct and verifiable, e.g., "50 per cent of the books have been completed" (measurable) rather than "most of the books."</div>
     </div>
     <div class="qa">
-      <div class="qa-q"><em>Q7.</em> Write one sentence each for declarative, interrogative, exclamatory and imperative types.</div>
-      <button class="rbtn" onclick="toggleAns('a7')">Show Answer</button>
-      <div class="ans" id="a7"><strong>Declarative:</strong> I completed my project on time. <br><strong>Interrogative:</strong> Did you complete your project? <br><strong>Exclamatory:</strong> I completed my project! <br><strong>Imperative:</strong> Complete your project today.</div>
+      <div class="qa-q"><em>Q10.</em> What is the RESPECT model? Name all seven steps.</div>
+      <button class="rbtn" onclick="toggleAns('a10')">Show Answer</button>
+      <div class="ans" id="a10">RESPECT is an acronym to ensure active listening: <strong>R</strong> — Remove distractions (reduce TV/phone volume). <strong>E</strong> — Eye contact (look at the speaker). <strong>S</strong> — Show you are listening (through gestures). <strong>P</strong> — Pay attention (focus on what is being said). <strong>E</strong> — Empathise (share the feelings of the speaker). <strong>C</strong> — Clarify doubts (ask questions). <strong>T</strong> — Tune to timing (wait for speaker to finish before responding).</div>
+    </div>
+    <div class="qa">
+      <div class="qa-q"><em>Q11.</em> Write one sentence each for declarative, interrogative, exclamatory and imperative types.</div>
+      <button class="rbtn" onclick="toggleAns('a11')">Show Answer</button>
+      <div class="ans" id="a11"><strong>Declarative:</strong> I completed my project on time. <br><strong>Interrogative:</strong> Did you complete your project? <br><strong>Exclamatory:</strong> I completed my project! <br><strong>Imperative:</strong> Complete your project today.</div>
+    </div>
+    <div class="qa">
+      <div class="qa-q"><em>Q12.</em> Explain the difference between a direct object and an indirect object with an example.</div>
+      <button class="rbtn" onclick="toggleAns('a12')">Show Answer</button>
+      <div class="ans" id="a12">A <strong>direct object</strong> is the person or thing that directly receives the action of the verb. It answers the question "What?". An <strong>indirect object</strong> answers "To whom?" or "For whom?". Example: "Abdul gave a gift to his mother." — Verb: gave. What did he give? → <strong>a gift</strong> (direct object). To whom? → <strong>his mother</strong> (indirect object).</div>
+    </div>
+    <div class="qa">
+      <div class="qa-q"><em>Q13.</em> What are the four barriers to active listening and how can they be overcome?</div>
+      <button class="rbtn" onclick="toggleAns('a13')">Show Answer</button>
+      <div class="ans" id="a13">1. <strong>Being pre-occupied</strong> — Do not let emotions take over; keep phones away. 2. <strong>Noise and visual distractions</strong> — Create a conducive environment. 3. <strong>Past experiences/mindset</strong> — Avoid biases; be objective. 4. <strong>Personal factors</strong> — Allow the other person to finish speaking, then respond.</div>
     </div>
 
     <div class="spanel">
-      <div><div class="snum" id="scoreNum">0/5</div><div class="stxt">MCQ Score</div></div>
+      <div><div class="snum" id="scoreNum">0/8</div><div class="stxt">MCQ Score</div></div>
       <button class="sbtn" onclick="resetAll()">↺ Reset Quiz</button>
     </div>
   </div>
@@ -451,12 +748,12 @@ function pick(id,el,correct){
   block.querySelectorAll('.opt').forEach(o=>{o.style.pointerEvents='none';});
   el.classList.add(correct?'correct':'wrong');
   if(correct){score++;} answered++;
-  document.getElementById('scoreNum').textContent=score+'/'+Math.min(answered,5);
+  document.getElementById('scoreNum').textContent=score+'/'+Math.min(answered,8);
 }
 function toggleAns(id){const el=document.getElementById(id);el.classList.toggle('show');}
 function resetAll(){
   score=0;answered=0;
-  document.getElementById('scoreNum').textContent='0/5';
+  document.getElementById('scoreNum').textContent='0/8';
   document.querySelectorAll('.mcq').forEach(b=>{
     delete b.dataset.done;
     b.querySelectorAll('.opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.pointerEvents='';});
