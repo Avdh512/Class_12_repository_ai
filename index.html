@@ -10,7 +10,6 @@
    DESIGN TOKENS — DAY / NIGHT
 ═══════════════════════════════════════════ */
 :root{ --tr:1.3s cubic-bezier(.4,0,.2,1); }
-
 [data-theme="day"]{
   --sky-top:#5ca8d0;--sky-mid:#a8d4ee;--sky-bot:#fde0b0;
   --bg:#fdf6ec;--surface:#fffbf5;--surface2:#fef3e2;--surface3:#fff8ef;
@@ -43,12 +42,10 @@
   --orbital-node-bg:#0e1828;--orbital-node-border:rgba(91,140,255,.45);
   --orbital-node-active:#5b8cff;--orbital-card-bg:rgba(10,18,38,0.97);
 }
-
 /* ═══════ RESET ═══════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;transition:background var(--tr),color var(--tr);overflow-x:hidden;}
-
 /* ═══════ SKY BACKGROUND ═══════ */
 .sky{position:fixed;inset:0;z-index:-2;pointer-events:none;}
 .sky-grad{
@@ -57,13 +54,11 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line
   opacity:.16;transition:background var(--tr),opacity var(--tr);
 }
 [data-theme="night"] .sky-grad{opacity:.45;}
-
 .sky-noise{
   position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   opacity:.4;
 }
-
 /* ═══════ CELESTIAL BODY ═══════ */
 .celestial-wrap{position:absolute;top:52px;right:120px;transition:all var(--tr);}
 [data-theme="night"] .celestial-wrap{top:68px;right:95px;}
@@ -79,12 +74,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line
 .cr1{width:12px;height:12px;top:14px;left:13px;}
 .cr2{width:7px;height:7px;top:28px;left:30px;}
 .cr3{width:9px;height:9px;top:9px;left:32px;}
-
 /* ═══════ STARS ═══════ */
 .stars-wrap{position:absolute;inset:0;opacity:var(--star-op);transition:opacity var(--tr);}
 .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
 @keyframes twinkle{0%,100%{opacity:.12;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
-
 /* ═══════ CLOUDS ═══════ */
 .clouds{position:absolute;inset:0;opacity:var(--cloud-op);transition:opacity var(--tr);pointer-events:none;}
 .cloud{position:absolute;border-radius:60px;background:rgba(255,255,255,.78);}
@@ -96,7 +89,6 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line
 .cl3{width:70px;height:24px;top:82px;left:33%;animation:drift 58s linear infinite 16s;}
 .cl3::before{width:36px;height:30px;top:-13px;left:9px;}
 @keyframes drift{from{transform:translateX(-280px)}to{transform:translateX(112vw)}}
-
 /* ═══════ NAV ═══════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:300;
@@ -122,7 +114,6 @@ nav{
   border-radius:8px;font-weight:700;
 }
 .nav-assess:hover{background:var(--accent) !important;color:#fff !important;border-color:var(--accent);}
-
 /* Toggle */
 .toggle-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .tlabel{font-size:.68rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--text-muted);transition:color var(--tr);user-select:none;}
@@ -139,7 +130,6 @@ nav{
   transition:transform .5s cubic-bezier(.4,0,.2,1),background .5s;
 }
 [data-theme="night"] .tbtn::after{transform:translateX(28px);}
-
 /* ═══════ HERO ═══════ */
 .hero{
   min-height:100vh;display:flex;flex-direction:column;
@@ -185,7 +175,6 @@ nav{
 }
 .scroll-hint svg{width:16px;height:16px;opacity:.6;}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
 /* ═══════ SECTION HEADER ═══════ */
 .section-header{text-align:center;padding:4rem 2rem 2.5rem;max-width:700px;margin:0 auto;}
 .section-eyebrow{
@@ -196,7 +185,6 @@ nav{
 }
 .section-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:.5rem;color:var(--text);transition:color var(--tr);}
 .section-sub{color:var(--text-muted);font-size:.9rem;line-height:1.65;}
-
 /* ═══════ DUAL ORBITAL LAYOUT ═══════ */
 .dual-orbital-wrap{
   display:grid;
@@ -242,12 +230,10 @@ nav{
   .dual-orbital-wrap{grid-template-columns:1fr;gap:3rem;}
   .dual-orbital-wrap::after{display:none;}
 }
-
 /* ═══════ ORBITAL SECTION ═══════ */
 .orbital-section{
   position:relative;
   padding:0 0 5rem;
-  /* FIXED: changed overflow:hidden to overflow:visible so cards are never clipped */
   overflow:visible;
 }
 .orbital-wrap{
@@ -369,7 +355,6 @@ nav{
   transition:opacity .2s,transform .2s;letter-spacing:.3px;
 }
 .orb-open-link:hover{opacity:.85;transform:translateY(-1px);}
-
 /* Orbital Card */
 .orb-card{
   position:absolute;top:64px;left:50%;transform:translateX(-50%);
@@ -377,7 +362,6 @@ nav{
   background:var(--orbital-card-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border:1px solid var(--border);border-radius:16px;
   box-shadow:0 20px 60px color-mix(in srgb,var(--accent) 12%,rgba(0,0,0,.2));
-  /* FIXED: ensure card itself never clips its contents */
   overflow:visible;
   z-index:100;pointer-events:auto;
   animation:cardIn .3s cubic-bezier(.4,0,.2,1);
@@ -414,7 +398,6 @@ nav{
   display:flex;align-items:center;gap:.3rem;
 }
 .orb-conn-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow);}
-
 /* ═══════ CHAPTER GRID ═══════ */
 .grid-section{padding:0 0 5rem;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.3rem;max-width:1120px;margin:0 auto;padding:0 2rem;}
@@ -460,7 +443,6 @@ nav{
   font-size:.8rem;font-weight:700;color:var(--card-accent,var(--accent));transition:gap .22s;
 }
 .chapter-card:hover .open-btn{gap:.85rem;}
-
 /* ═══════ QUIZ SECTION ═══════ */
 .quiz-section{padding:4.5rem 0 5.5rem;border-top:1px solid var(--border);}
 .quiz-wrap{max-width:1120px;margin:0 auto;padding:0 2rem;}
@@ -541,7 +523,6 @@ nav{
   font-family:'Outfit',sans-serif;transition:all .22s;
 }
 .retry-btn:hover{opacity:.85;transform:translateY(-1px);}
-
 /* ═══════ FOOTER ═══════ */
 footer{
   text-align:center;padding:3rem 2rem;
@@ -551,10 +532,8 @@ footer{
 }
 footer strong{color:var(--accent);}
 .footer-mono{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text-faint);margin-top:.3rem;}
-
 /* ═══════ DIVIDER ═══════ */
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 2rem;}
-
 /* ═══════ RESPONSIVE ═══════ */
 @media(max-width:640px){
   .grid{grid-template-columns:1fr;padding:0 1.2rem;}
@@ -563,7 +542,6 @@ footer strong{color:var(--accent);}
   .q-tab{font-size:.7rem;padding:.38rem .85rem;}
   .tlabel,.nav-sub,.nav-link{display:none;}
   .hero{padding:6rem 1.5rem 3rem;}
-  /* FIXED: increased mobile wrap height from 500px to 680px */
   .orbital-wrap{height:680px;}
   .orbit-track{width:360px;height:360px;}
   nav{padding:0 1.2rem;}
@@ -571,7 +549,6 @@ footer strong{color:var(--accent);}
 </style>
 </head>
 <body>
-
 <!-- ═══ SKY ATMOSPHERE ═══ -->
 <div class="sky">
   <div class="sky-grad"></div>
@@ -590,7 +567,6 @@ footer strong{color:var(--accent);}
     <div class="cloud cl3"></div>
   </div>
 </div>
-
 <!-- ═══ NAVIGATION ═══ -->
 <nav>
   <div class="nav-logo">Class XII · AI</div>
@@ -608,7 +584,6 @@ footer strong{color:var(--accent);}
     </div>
   </div>
 </nav>
-
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-inner">
@@ -623,7 +598,6 @@ footer strong{color:var(--accent);}
     Explore Units
   </div>
 </section>
-
 <!-- ═══ ORBITAL TIMELINE ═══ -->
 <section class="orbital-section" id="units">
   <div class="section-header">
@@ -631,10 +605,7 @@ footer strong{color:var(--accent);}
     <div class="section-title">Two Orbital Systems</div>
     <div class="section-sub">Click any node to explore. Left orbit — Artificial Intelligence (8 units). Right orbit — Employability Skills (5 units).</div>
   </div>
-
-  <!-- Two orbitals side by side -->
   <div class="dual-orbital-wrap">
-
     <!-- LEFT: AI -->
     <div class="orbital-half">
       <div class="orbital-half-label">
@@ -654,7 +625,6 @@ footer strong{color:var(--accent);}
         </div>
       </div>
     </div>
-
     <!-- RIGHT: ES -->
     <div class="orbital-half">
       <div class="orbital-half-label">
@@ -674,12 +644,9 @@ footer strong{color:var(--accent);}
         </div>
       </div>
     </div>
-
   </div>
 </section>
-
 <div class="divider"></div>
-
 <!-- ═══ AI CHAPTER GRID ═══ -->
 <section class="grid-section">
   <div class="section-header">
@@ -754,9 +721,7 @@ footer strong{color:var(--accent);}
     </a>
   </div>
 </section>
-
 <div class="divider"></div>
-
 <!-- ═══ EMPLOYABILITY SKILLS GRID ═══ -->
 <section class="grid-section" id="employability">
   <div class="section-header">
@@ -773,12 +738,13 @@ footer strong{color:var(--accent);}
       <div class="card-topics"><span class="topic-tag">Active Listening</span><span class="topic-tag">RESPECT Model</span><span class="topic-tag">Parts of Speech</span><span class="topic-tag">Sentences</span></div>
       <div class="open-btn">Open ES Unit 1 <span>→</span></div>
     </a>
-    <a href="#" class="chapter-card" style="--card-accent:#06b6d4;cursor:default;" onclick="return false;">
+    <a href="es_unit2_self_management_skills.html" class="chapter-card" style="--card-accent:#06b6d4;">
+      <div class="avail-badge">✓ Available</div>
       <div class="card-unit">ES · Unit 02</div>
       <div class="card-title">Self-management Skills</div>
       <div class="card-desc">Motivation & positive attitude, result orientation, SMART goals, self-awareness and the Big Five personality factor model.</div>
       <div class="card-topics"><span class="topic-tag">Motivation</span><span class="topic-tag">SMART Goals</span><span class="topic-tag">Self-Awareness</span><span class="topic-tag">Personality</span></div>
-      <div class="open-btn" style="opacity:.45;font-size:.75rem;color:var(--text-faint)">Coming Soon</div>
+      <div class="open-btn">Open ES Unit 2 <span>→</span></div>
     </a>
     <a href="#" class="chapter-card" style="--card-accent:#f59e0b;cursor:default;" onclick="return false;">
       <div class="card-unit">ES · Unit 03</div>
@@ -803,9 +769,7 @@ footer strong{color:var(--accent);}
     </a>
   </div>
 </section>
-
 <div class="divider"></div>
-
 <!-- ═══ QUIZ SECTION ═══ -->
 <section class="quiz-section" id="quizzes">
   <div class="quiz-wrap">
@@ -832,13 +796,11 @@ footer strong{color:var(--accent);}
     <div class="quiz-panel" id="panel-q8"></div>
   </div>
 </section>
-
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <p><strong>Class XII · Artificial Intelligence · Subject Code 843 · CBSE</strong></p>
   <p class="footer-mono">AI + Employability Skills Repository by <strong>Avdhesh</strong> — 8 AI Units · 5 ES Units</p>
 </footer>
-
 <script>
 /* ════════════════════════════════════
    STARS
@@ -851,7 +813,6 @@ for(let i=0;i<200;i++){
   s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*6}s;`;
   sw.appendChild(s);
 }
-
 /* ════════════════════════════════════
    DAY / NIGHT TOGGLE
 ════════════════════════════════════ */
@@ -862,7 +823,6 @@ function toggleTheme(){
   document.getElementById('tlbl').textContent = isDay ? 'Day' : 'Night';
   document.getElementById('tico').textContent = isDay ? '☀️' : '🌙';
 }
-
 /* ════════════════════════════════════
    ORBITAL TIMELINE DATA
 ════════════════════════════════════ */
@@ -876,7 +836,6 @@ const UNITS = [
   { id:7, label:'Unit 07', title:'Generative AI', date:'LLMs & GANs', emoji:'✨', color:'#34d399', status:'pending', energy:30, desc:'Generative vs Discriminative models, LLMs, GANs, deepfakes, and AI ethics.', related:[6,8], link:'chapter7_complete.html' },
   { id:8, label:'Unit 08', title:'Data Storytelling', date:'Narrative', emoji:'📖', color:'#fbbf24', status:'pending', energy:15, desc:'Freytag\'s Pyramid applied to data — visuals, narrative, and ethical storytelling.', related:[2,7], link:'chapter8_complete.html' },
 ];
-
 /* ════════════════════════════════════
    ORBITAL ENGINE
 ════════════════════════════════════ */
@@ -885,7 +844,6 @@ let autoRotate = true;
 let activeId = null;
 let rafId = null;
 const nodeEls = {};
-
 function buildOrbital(){
   const wrap = document.getElementById('orbitalWrap');
   UNITS.forEach((u, i) => {
@@ -904,14 +862,11 @@ function buildOrbital(){
     wrap.appendChild(el);
     nodeEls[u.id] = el;
   });
-
   wrap.addEventListener('click', () => {
     if(activeId !== null){ closeAll(); }
   });
-
   startRotation();
 }
-
 function positionNodes(){
   const isMobile = window.innerWidth < 640;
   const R = isMobile ? 168 : 225;
@@ -930,7 +885,6 @@ function positionNodes(){
     el.style.opacity = op;
   });
 }
-
 function startRotation(){
   let last = 0;
   function tick(ts){
@@ -944,27 +898,22 @@ function startRotation(){
   }
   rafId = requestAnimationFrame(tick);
 }
-
 function toggleNode(id){
   if(activeId === id){ closeAll(); return; }
   closeAll(false);
   activeId = id;
   autoRotate = false;
-
   nodeEls[id].classList.add('active');
-
   const unit = UNITS.find(u => u.id === id);
   unit.related.forEach(rid => {
     if(nodeEls[rid]) nodeEls[rid].classList.add('related');
   });
-
   const statusClass = { completed:'status-completed', 'in-progress':'status-in-progress', pending:'status-pending' }[unit.status];
   const statusText = { completed:'Complete', 'in-progress':'In Progress', pending:'Pending' }[unit.status];
   const connBtns = unit.related.map(rid => {
     const r = UNITS.find(u => u.id === rid);
     return `<button class="orb-conn-btn" onclick="event.stopPropagation();toggleNode(${rid})">${r.emoji} ${r.label} →</button>`;
   }).join('');
-
   const card = document.createElement('div');
   card.className = 'orb-card';
   card.id = 'orb-card-' + id;
@@ -986,17 +935,14 @@ function toggleNode(id){
     </div>
   `;
   nodeEls[id].appendChild(card);
-
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const fill = card.querySelector('.orb-energy-fill');
       if(fill) fill.style.width = unit.energy + '%';
     });
   });
-
   positionNodes();
 }
-
 function closeAll(resume=true){
   if(activeId !== null){
     const card = document.getElementById('orb-card-' + activeId);
@@ -1007,25 +953,21 @@ function closeAll(resume=true){
   activeId = null;
   if(resume) autoRotate = true;
 }
-
 buildOrbital();
-
 /* ════════════════════════════════════
    ES ORBITAL ENGINE
 ════════════════════════════════════ */
 const ES_UNITS = [
   { id:'es1', label:'ES 01', title:'Communication Skills', date:'Listening & Language', emoji:'🗣️', color:'#e879a0', status:'completed', energy:100, desc:'Active listening (RESPECT model), parts of speech, writing sentences — active/passive voice and four sentence types.', related:['es2'], link:'es_unit1_communication_skills.html' },
-  { id:'es2', label:'ES 02', title:'Self-management', date:'Goals & Mindset', emoji:'🎯', color:'#06b6d4', status:'pending', energy:0, desc:'Motivation, positive attitude, SMART goal-setting, result orientation, self-awareness and the Big Five personality model.', related:['es1','es3'], link:'#' },
+  { id:'es2', label:'ES 02', title:'Self-management', date:'Goals & Mindset', emoji:'🎯', color:'#06b6d4', status:'completed', energy:100, desc:'Motivation, positive attitude, SMART goal-setting, result orientation, self-awareness and the Big Five personality model.', related:['es1','es3'], link:'es_unit2_self_management_skills.html' },
   { id:'es3', label:'ES 03', title:'ICT Skills', date:'Spreadsheets & Slides', emoji:'💻', color:'#f59e0b', status:'pending', energy:0, desc:'LibreOffice Calc for spreadsheets and LibreOffice Impress for presentations — data entry, formulas, formatting, shapes and images.', related:['es2','es4'], link:'#' },
   { id:'es4', label:'ES 04', title:'Entrepreneurship', date:'Business & Startups', emoji:'🚀', color:'#8b5cf6', status:'pending', energy:0, desc:'Entrepreneurship concepts, types of entrepreneurs, opportunity identification, startups, initiative and organisational skills.', related:['es3','es5'], link:'#' },
   { id:'es5', label:'ES 05', title:'Green Skills', date:'Sustainability', emoji:'🌱', color:'#10b981', status:'pending', energy:0, desc:'Green jobs in agriculture, transport, solar/wind energy, eco-tourism, construction and solid waste management.', related:['es4'], link:'#' },
 ];
-
 let esAngle = 120;
 let esAutoRotate = true;
 let esActiveId = null;
 const esNodeEls = {};
-
 function buildESorbital(){
   const wrap = document.getElementById('orbitalWrapES');
   ES_UNITS.forEach((u) => {
@@ -1047,7 +989,6 @@ function buildESorbital(){
   wrap.addEventListener('click', () => { if(esActiveId !== null) closeESAll(); });
   startESRotation();
 }
-
 function positionESNodes(){
   const isMobile = window.innerWidth < 640;
   const R = isMobile ? 140 : 178;
@@ -1066,7 +1007,6 @@ function positionESNodes(){
     el.style.opacity = op;
   });
 }
-
 function startESRotation(){
   let last = 0;
   function tick(ts){
@@ -1080,7 +1020,6 @@ function startESRotation(){
   }
   requestAnimationFrame(tick);
 }
-
 function toggleESNode(id){
   if(esActiveId === id){ closeESAll(); return; }
   closeESAll(false);
@@ -1125,7 +1064,6 @@ function toggleESNode(id){
   }));
   positionESNodes();
 }
-
 function closeESAll(resume=true){
   if(esActiveId !== null){
     const card = document.getElementById('es-orb-card-' + esActiveId);
@@ -1136,9 +1074,7 @@ function closeESAll(resume=true){
   esActiveId = null;
   if(resume) esAutoRotate = true;
 }
-
 buildESorbital();
-
 /* ════════════════════════════════════
    QUIZ DATA
 ════════════════════════════════════ */
@@ -1228,12 +1164,10 @@ const QD={
     {q:'Which is a good ethical practice in Data Storytelling?',o:['Truncating Y-axes to exaggerate differences','Using misleading averages','Showing complete context and citing data sources','Silently ignoring outliers'],a:2,e:'Ethical storytelling demands transparency — full context, honest data sources, and acknowledgment of limitations.'}
   ]}
 };
-
 /* ════════════════════════════════════
    QUIZ ENGINE
 ════════════════════════════════════ */
 const ST = {};
-
 function buildQuiz(id){
   const d = QD[id];
   const panel = document.getElementById('panel-'+id);
@@ -1266,7 +1200,6 @@ function buildQuiz(id){
     </div>`;
   ST[id] = {cur:0,score:0,done:new Array(d.qs.length).fill(false)};
 }
-
 function pick(id,qi,oi){
   const st = ST[id];
   if(st.done[qi]) return;
@@ -1284,7 +1217,6 @@ function pick(id,qi,oi){
   fb.textContent = (ok ? '✓ Correct! ' : '✗ Incorrect. ') + q.e;
   fb.className = 'q-fb on ' + (ok ? 'ok' : 'no');
 }
-
 function go(id,dir){
   const st = ST[id];
   const total = QD[id].qs.length;
@@ -1295,7 +1227,6 @@ function go(id,dir){
   document.getElementById(`qb-${id}-${st.cur}`).classList.add('vis');
   updateNav(id);
 }
-
 function updateNav(id){
   const st = ST[id];
   const total = QD[id].qs.length;
@@ -1304,7 +1235,6 @@ function updateNav(id){
   document.getElementById(`ctr-${id}`).textContent = `Q ${st.cur+1} / ${total}`;
   document.getElementById(`pb-${id}`).style.width = ((st.cur+1)/total*100) + '%';
 }
-
 function showResult(id){
   const st = ST[id];
   const total = QD[id].qs.length;
@@ -1319,9 +1249,7 @@ function showResult(id){
   document.getElementById(`rtitle-${id}`).textContent = medal;
   document.getElementById(`rsub-${id}`).textContent = `You scored ${st.score} out of ${total} (${pct}%). ${pct>=70?'Excellent work, Avdhesh!':'Review the chapter notes and try again!'}`;
 }
-
 function retry(id){ buildQuiz(id); }
-
 function switchQ(id,btn){
   document.querySelectorAll('.quiz-panel').forEach(p => p.classList.remove('show'));
   document.querySelectorAll('.q-tab').forEach(t => t.classList.remove('active'));
@@ -1329,7 +1257,6 @@ function switchQ(id,btn){
   btn.classList.add('active');
   if(!ST[id]) buildQuiz(id);
 }
-
 Object.keys(QD).forEach(id => buildQuiz(id));
 </script>
 </body>
